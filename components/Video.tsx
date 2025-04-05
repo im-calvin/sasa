@@ -1,17 +1,24 @@
 "use client";
-import { trackFallbackParamAccessed } from "next/dist/server/app-render/dynamic-rendering";
-import { useRef, useEffect, useState, RefObject } from "react";
+import {
+  useRef,
+  useEffect,
+  useState,
+  RefObject,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { Dispatch, SetStateAction } from "react";
 
 type VideoPropsT = {
   setTime: Dispatch<SetStateAction<number>>;
-  takeScreenshot: (
-    video: RefObject<HTMLVideoElement>,
-    canvasRef: RefObject<HTMLVideoElement>
-  ) => void;
+  handleScreenshot: (imageDataUrl: string) => void;
 };
 
-export function Video({ setTime, takeScreenshot }: VideoPropsT) {
+// Define Video as a regular function
+const Video = forwardRef(function Video(
+  { setTime, handleScreenshot }: VideoPropsT,
+  ref
+) {
   const streamRef = useRef<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isStreamReady, setIsStreamReady] = useState(false);
@@ -31,8 +38,16 @@ export function Video({ setTime, takeScreenshot }: VideoPropsT) {
   }
 
   useEffect(() => {
+    if (videoRef.current && streamRef.current) {
+      videoRef.current.srcObject = streamRef.current;
+      videoRef.current.play();
+    }
+  }, [isStreamReady]);
+
+  useEffect(() => {
     requestCameraPermission();
 
+    // cleanup when the page unloads
     return () => {
       if (streamRef.current) {
         streamRef.current.getTracks().forEach((track) => track.stop());
@@ -40,36 +55,31 @@ export function Video({ setTime, takeScreenshot }: VideoPropsT) {
     };
   }, []);
 
-  // whenever the parent triggers takeScreenshot, this component takes a screenshot and then passes it back up
-  function screenshot() {
-    if (!streamRef.current || !videoRef.current) {
-      return;
-    }
+  // Expose the getScreenshot method to the parent component
+  useImperativeHandle(ref, () => ({
+    // returns a image/png string
+    getScreenshot() {
+      if (!streamRef.current || !videoRef.current) {
+        return;
+      }
 
-    const canvas = document.createElement("canvas");
-    const video = videoRef.current;
-    const context = canvas.getContext("2d");
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
-    context?.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const canvas = document.createElement("canvas");
+      const video = videoRef.current;
+      const context = canvas.getContext("2d");
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context?.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    const imageDataUrl = canvas.toDataURL("image/png");
-
-    console.log(imageDataUrl);
-  }
+      const imageDataUrl = canvas.toDataURL("image/png");
+      return imageDataUrl;
+    },
+  }));
 
   return isStreamReady ? (
-    <video
-      autoPlay
-      ref={videoRef}
-      onLoadedMetadata={() => {
-        if (streamRef.current) {
-          videoRef.current!.srcObject = streamRef.current; // Set the stream to the video element
-        }
-      }}
-      className="w-full"
-    />
+    <video autoPlay ref={videoRef} className="w-full" />
   ) : (
     <p>Please allow camera access</p>
   );
-}
+});
+
+export { Video };
