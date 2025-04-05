@@ -1,4 +1,5 @@
 "use client";
+import { RESET_TIME } from "@/lib/constants";
 import {
   useRef,
   useEffect,
@@ -11,14 +12,10 @@ import { Dispatch, SetStateAction } from "react";
 
 type VideoPropsT = {
   setTime: Dispatch<SetStateAction<number>>;
-  handleScreenshot: (imageDataUrl: string) => void;
 };
 
 // Define Video as a regular function
-const Video = forwardRef(function Video(
-  { setTime, handleScreenshot }: VideoPropsT,
-  ref
-) {
+const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
   const streamRef = useRef<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isStreamReady, setIsStreamReady] = useState(false);
@@ -31,7 +28,7 @@ const Video = forwardRef(function Video(
       console.log("Camera permission granted");
       streamRef.current = stream;
       setIsStreamReady(true);
-      setTime(6);
+      setTime(RESET_TIME);
     } catch (error) {
       console.error("Camera permission denied", error);
     }
