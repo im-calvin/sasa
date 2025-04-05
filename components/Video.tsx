@@ -1,11 +1,14 @@
 "use client";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 type VideoPropsT = {
+  setTime: Dispatch<SetStateAction<number>>;
 };
 
-export function Video({  }: VideoPropsT) {
+export function Video({setTime}: VideoPropsT) {
   const streamRef = useRef<MediaStreamTrack[] | null>(null);
+  const [isStreamReady, setIsStreamReady] = useState(false);
 
   async function requestCameraPermission() {
     try {
@@ -14,6 +17,8 @@ export function Video({  }: VideoPropsT) {
       });
       console.log("Camera permission granted");
       streamRef.current = stream.getVideoTracks();
+      setIsStreamReady(true);
+      setTime(6);
     } catch (error) {
       console.error("Camera permission denied", error);
     }
@@ -23,7 +28,7 @@ export function Video({  }: VideoPropsT) {
     requestCameraPermission();
   }, []);
 
-  return streamRef.current ? (
+  return isStreamReady ? (
     <video
       autoPlay
       ref={(video) => {
