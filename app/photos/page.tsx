@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useScreenshots } from "@/lib/ScreenshotsContext";
 import { CheckCircle } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export default function PhotosPage() {
   const { screenshots } = useScreenshots();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  const [photostrip, setPhotostrip] = useState<string | null>(null);
 
   const toggleSelection = (image: string) => {
     setSelectedImages((prev) => {
@@ -17,6 +19,21 @@ export default function PhotosPage() {
       }
       return prev; // Do nothing if limit reached
     });
+  };
+
+  const generatePhotostrip = async () => {
+    const response = await fetch("/api/composite", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ images: selectedImages }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      setPhotostrip(data.image);
+    } else {
+      console.error("Failed to generate photostrip");
+    }
   };
 
   return (
@@ -49,6 +66,12 @@ export default function PhotosPage() {
       <p className="mt-4 text-sm text-gray-600">
         Selected {selectedImages.length} of 4 images.
       </p>
+      <Button onClick={generatePhotostrip}>Generate photostrip</Button>
+      {photostrip && (
+        <div className="mt-4">
+          <img src={photostrip} alt="Photostrip" />
+        </div>
+      )}
     </div>
   );
 }
