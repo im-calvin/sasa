@@ -8,6 +8,7 @@ import {
   useImperativeHandle,
 } from "react";
 import { Dispatch, SetStateAction } from "react";
+import styles from "@/styles/Video.module.scss";
 
 type VideoPropsT = {
   setTime: Dispatch<SetStateAction<number>>;
@@ -81,7 +82,7 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
       ref={videoRef}
       playsInline
       muted
-      className="w-full [&::-webkit-media-controls]:hidden [&::-webkit-media-controls-start-playback-button]:hidden"
+      className="w-full transform scale-x-[-1]"
     />
   ) : (
     <p>Please allow camera access</p>
