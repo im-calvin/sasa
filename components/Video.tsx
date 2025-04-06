@@ -22,6 +22,7 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
   useEffect(() => {
     if (videoRef.current && streamRef.current) {
       videoRef.current.srcObject = streamRef.current;
+      videoRef.current.muted = true;
       videoRef.current.play();
     }
   }, [isStreamReady]);
@@ -30,7 +31,9 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
     async function requestCameraPermission() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
+          video: {
+            facingMode: "user",
+          },
         });
         console.log("Camera permission granted");
         streamRef.current = stream;
@@ -40,7 +43,7 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
         console.error("Camera permission denied", error);
       }
     }
-  
+
     requestCameraPermission();
 
     // cleanup when the page unloads
@@ -72,7 +75,7 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
   }));
 
   return isStreamReady ? (
-    <video autoPlay ref={videoRef} className="w-full" />
+    <video autoPlay ref={videoRef} playsInline muted className="w-full" />
   ) : (
     <p>Please allow camera access</p>
   );
