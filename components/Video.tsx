@@ -4,7 +4,6 @@ import {
   useRef,
   useEffect,
   useState,
-  RefObject,
   forwardRef,
   useImperativeHandle,
 } from "react";
@@ -20,20 +19,6 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isStreamReady, setIsStreamReady] = useState(false);
 
-  async function requestCameraPermission() {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-      });
-      console.log("Camera permission granted");
-      streamRef.current = stream;
-      setIsStreamReady(true);
-      setTime(RESET_TIME);
-    } catch (error) {
-      console.error("Camera permission denied", error);
-    }
-  }
-
   useEffect(() => {
     if (videoRef.current && streamRef.current) {
       videoRef.current.srcObject = streamRef.current;
@@ -42,6 +27,20 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
   }, [isStreamReady]);
 
   useEffect(() => {
+    async function requestCameraPermission() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
+        console.log("Camera permission granted");
+        streamRef.current = stream;
+        setIsStreamReady(true);
+        setTime(RESET_TIME);
+      } catch (error) {
+        console.error("Camera permission denied", error);
+      }
+    }
+  
     requestCameraPermission();
 
     // cleanup when the page unloads
@@ -50,7 +49,7 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
         streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
-  }, []);
+  }, [setTime]);
 
   // Expose the getScreenshot method to the parent component
   useImperativeHandle(ref, () => ({

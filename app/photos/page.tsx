@@ -69,7 +69,7 @@ export default function PhotosPage() {
       <Button onClick={generatePhotostrip}>Generate photostrip</Button>
       {photostrip && (
         <div className="mt-4">
-          <img src={photostrip} alt="Photostrip" />
+          <Image src={photostrip} alt="Photostrip" />
         </div>
       )}
     </div>

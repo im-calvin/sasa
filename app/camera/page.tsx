@@ -1,5 +1,5 @@
 "use client";
-import { memo, RefObject, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { Video } from "@/components/Video";
 import { MAX_PHOTOS, RESET_TIME } from "@/lib/constants";
 import { useRouter } from "next/navigation";
@@ -28,7 +28,7 @@ export default function CameraPage() {
       addScreenshot(image);
       setTime(RESET_TIME); // reset the timer
     }
-  }, [time]);
+  }, [time, addScreenshot]);
 
   useEffect(() => {
     console.log(screenshots.length);
