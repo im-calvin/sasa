@@ -77,6 +77,7 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
   return isStreamReady ? (
     <video
       autoPlay
+      loop
       ref={videoRef}
       playsInline
       muted
