@@ -12,7 +12,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const backgroundImage = await sharp("public/background.png").toBuffer();
+    const backgroundImage = await sharp("/background.png").toBuffer();
 
     // Load and process each image
     const buffers = await Promise.all(
