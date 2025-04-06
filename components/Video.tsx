@@ -75,7 +75,13 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
   }));
 
   return isStreamReady ? (
-    <video autoPlay ref={videoRef} playsInline muted className="w-full" />
+    <video
+      autoPlay
+      ref={videoRef}
+      playsInline
+      muted
+      className="w-full [&::-webkit-media-controls]:hidden [&::-webkit-media-controls-start-playback-button]:hidden"
+    />
   ) : (
     <p>Please allow camera access</p>
   );
