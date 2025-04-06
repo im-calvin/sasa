@@ -20,7 +20,10 @@ export default function Home() {
           Take some photos and enjoy these digital frames I designed~
         </h3>
         <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <Button asChild variant="outline" className="font-bold font-geist">
+          <Button
+            asChild
+            variant="outline"
+            className="font-bold font-geist border-black">
             <Link href="/camera">Start</Link>
           </Button>
         </div>
