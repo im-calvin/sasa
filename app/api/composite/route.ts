@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import path from "path";
 import sharp from "sharp";
 
 export async function POST(req: Request) {
@@ -12,7 +13,12 @@ export async function POST(req: Request) {
       );
     }
 
-    const backgroundImage = await sharp("/background.png").toBuffer();
+    const backgroundImagePath = path.join(
+      process.cwd(),
+      "public",
+      "background.png"
+    );
+    const backgroundImage = await sharp(backgroundImagePath).toBuffer();
 
     // Load and process each image
     const buffers = await Promise.all(
