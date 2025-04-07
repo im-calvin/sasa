@@ -13,7 +13,6 @@ export default function PhotosPage() {
   const { screenshots } = useScreenshots();
   const router = useRouter();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
-  const [photostrip, setPhotostrip] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const toggleSelection = (image: string) => {
@@ -37,14 +36,17 @@ export default function PhotosPage() {
       body: JSON.stringify({ images: selectedImages }),
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      // TODO go to /results, need to get the image somehow (maybe s3?)
-      setPhotostrip(data.url);
-      router.push("/results");
-    } else {
+    if (!response.ok) {
       console.error("Failed to generate photostrip");
+      return;
     }
+
+    const data = await response.json();
+    // get the photostrip url from the response
+    const url = data.url as string;
+    const params = new URLSearchParams();
+    params.set("url", url);
+    router.push(`/results?${params.toString()}`);
   }
 
   return (
@@ -112,11 +114,6 @@ export default function PhotosPage() {
       <footer className="row-start-6">
         <Footer />
       </footer>
-      {photostrip && (
-        <div className="mt-4">
-          <Image src={photostrip} alt="Photostrip" width={500} height={500} />
-        </div>
-      )}
     </div>
   );
 }
