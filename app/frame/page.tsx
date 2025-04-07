@@ -4,11 +4,10 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useFrame } from "@/lib/FrameContext";
 
 export default function FramePage() {
-  const [selectedFrame, setSelectedFrame] = useState<"" | "light" | "dark">("");
-
-  console.log(selectedFrame === "");
+  const { selectedFrame, setSelectedFrame } = useFrame();
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-instrument">
@@ -73,7 +72,12 @@ export default function FramePage() {
           variant="outline"
           disabled={selectedFrame === ""}
           className="font-bold font-geist border-black">
-          <Link href="/camera">Next</Link>
+          <Link
+            href={{
+              pathname: "/camera",
+            }}>
+            Next
+          </Link>
         </Button>
       </div>
       <footer className="row-start-4 flex gap-[24px] flex-wrap items-center justify-center">
