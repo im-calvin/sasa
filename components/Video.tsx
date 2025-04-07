@@ -1,5 +1,4 @@
 "use client";
-import { RESET_TIME } from "@/lib/constants";
 import {
   useRef,
   useEffect,
@@ -7,7 +6,6 @@ import {
   forwardRef,
   useImperativeHandle,
 } from "react";
-import { Dispatch, SetStateAction } from "react";
 import styles from "@/styles/Video.module.scss";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Skeleton } from "@/components/ui/skeleton";
