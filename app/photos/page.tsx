@@ -40,8 +40,8 @@ export default function PhotosPage() {
     if (response.ok) {
       const data = await response.json();
       // TODO go to /results, need to get the image somehow (maybe s3?)
+      setPhotostrip(data.url);
       router.push("/results");
-      setPhotostrip(data.image);
     } else {
       console.error("Failed to generate photostrip");
     }

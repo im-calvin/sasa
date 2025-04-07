@@ -1,3 +1,4 @@
+import { putImage } from "@/lib/s3";
 import { NextResponse } from "next/server";
 import path from "path";
 import sharp from "sharp";
@@ -13,6 +14,7 @@ export async function POST(req: Request) {
       );
     }
 
+    // public is not accessible from the server, so we need to use process.cwd() to get the path
     const backgroundImagePath = path.join(
       process.cwd(),
       "public",
@@ -29,7 +31,7 @@ export async function POST(req: Request) {
     );
 
     // Composite the images vertically
-    const compositeImage = await sharp(backgroundImage)
+    const compositeImageBuffer = await sharp(backgroundImage)
       .composite(
         buffers.map((buffer, index) => ({
           input: buffer,
@@ -40,11 +42,10 @@ export async function POST(req: Request) {
       .png()
       .toBuffer();
 
-    // Return the composited image as a base64 string
-    const base64Image = `data:image/png;base64,${compositeImage.toString(
-      "base64"
-    )}`;
-    return NextResponse.json({ image: base64Image });
+    // store the image into s3
+    const url = await putImage(compositeImageBuffer);
+
+    return NextResponse.json({ url });
   } catch (error) {
     console.error("Error processing images:", error);
     return NextResponse.json(
