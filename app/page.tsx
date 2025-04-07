@@ -18,10 +18,10 @@ export default function Home() {
           height={38}
           priority
         />
-        <div className="body text-center w-4/5">
+        <p className="text-center w-4/5">
           Thanks for coming! Take some photos and enjoy these digital frames I
           designed~
-        </div>
+        </p>
       </main>
       <div className="flex gap-4 justify-center flex-row row-start-5">
         <PrimaryButton text={"Start"} href={"/frame"} />
