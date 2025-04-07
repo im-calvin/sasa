@@ -8,7 +8,7 @@ import {
   useImperativeHandle,
 } from "react";
 import { Dispatch, SetStateAction } from "react";
-import "@/styles/Video.module.scss";
+import styles from "@/styles/Video.module.scss";
 
 type VideoPropsT = {
   setTime?: Dispatch<SetStateAction<number>>;
@@ -78,14 +78,16 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
   }));
 
   return isStreamReady ? (
-    <video
-      autoPlay
-      loop
-      ref={videoRef}
-      playsInline
-      muted
-      className="w-full transform scale-x-[-1]"
-    />
+    <div className={styles.videoContainer}>
+      <video
+        autoPlay
+        loop
+        ref={videoRef}
+        playsInline
+        muted
+        className="w-full transform scale-x-[-1]"
+      />
+    </div>
   ) : (
     <p>Please allow camera access</p>
   );

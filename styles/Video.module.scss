@@ -1,5 +1,7 @@
 
-:global(video::-webkit-media-controls-start-playback-button) {
-  display: none !important;
-  -webkit-appearance: none;
+.videoContainer {
+  video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+  }
 }
