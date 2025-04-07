@@ -5,100 +5,72 @@ import Image from "next/image";
 import Link from "next/link";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useFrame } from "@/lib/FrameContext";
+import Footer from "@/components/Footer";
+import PrimaryButton from "@/components/PrimaryButton";
 
 export default function FramePage() {
   const { selectedFrame, setSelectedFrame } = useFrame();
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-instrument">
-      <header>
+    <div className="grid grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center min-h-screen p-8 gap-8 sm:p-20">
+      <header className="row-start-1">
         <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
       </header>
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h3 className="font-geist font-light">STEP 1</h3>
-        <h2 className="font-instrument text-red-300 italic">Choose a frame</h2>
-        <div className="grid grid-cols-2 grid-rows-[20px_1fr] gap-8">
-          <AspectRatio ratio={136 / 366}>
-            <Image
-              onClick={() => {
-                setSelectedFrame("light");
-              }}
-              className={
-                selectedFrame === "light" ? "border-4 border-red-500" : ""
+      <h3 className="row-start-2">STEP 1</h3>
+      <h2 className="row-start-3">Choose a frame</h2>
+      <main className="row-start-4 grid grid-cols-2 grid-rows-[20px_1fr] gap-8">
+        <AspectRatio ratio={136 / 366}>
+          <Image
+            onClick={() => {
+              setSelectedFrame("light");
+            }}
+            className={`
+              p-2 box-content
+              ${
+                selectedFrame === "light" ? "border-2 border-(--saman-red)" : ""
               }
-              src="/next.svg"
-              alt="Digital Frames"
-              width={180}
-              height={38}
-              priority
-            />
-          </AspectRatio>
-          <AspectRatio ratio={136 / 366}>
-            <Image
-              onClick={() => {
-                setSelectedFrame("dark");
-              }}
-              className={
-                selectedFrame === "dark" ? "border-4 border-red-500" : ""
-              }
-              src="/next.svg"
-              alt="Digital Frames"
-              width={180}
-              height={38}
-              priority
-            />
-          </AspectRatio>
-          <div>
-            <h3 className="font-bold font-geist text-md text-center">
-              LIGHT VER.
-            </h3>
-            <p className="font-geist text-sm text-center">(3 photos)</p>
-          </div>
-          <div>
-            <h3 className="font-bold font-geist text-md text-center">
-              DARK VER.
-            </h3>
-            <p className="font-geist text-sm text-center">(3 photos)</p>
-          </div>
+              `}
+            src="/next.svg"
+            alt="Digital Frames"
+            width={180}
+            height={38}
+            priority
+          />
+        </AspectRatio>
+        <AspectRatio ratio={136 / 366}>
+          <Image
+            onClick={() => {
+              setSelectedFrame("dark");
+            }}
+            className={`
+              p-2 box-content
+              ${selectedFrame === "dark" ? "border-2 border-(--saman-red)" : ""}
+              `}
+            src="/next.svg"
+            alt="Digital Frames"
+            width={180}
+            height={38}
+            priority
+          />
+        </AspectRatio>
+        <div>
+          <h4 className="text-center">LIGHT VER.</h4>
+          <h5 className="text-center">(3 photos)</h5>
+        </div>
+        <div>
+          <h4 className="md text-center">DARK VER.</h4>
+          <h5 className="text-center">(3 photos)</h5>
         </div>
       </main>
-      <div className="row-start-3 flex w-full justify-between flex-row sm:flex-row">
-        <Button
-          asChild
-          variant="outline"
-          className="font-bold font-geist border-black">
-          <Link href="/">Back</Link>
-        </Button>
-        <Button
-          asChild={selectedFrame !== ""} // the disabled doesn't work without this, ref: https://github.com/shadcn-ui/ui/issues/1894#issuecomment-2089988087
-          variant="outline"
-          disabled={selectedFrame === ""}
-          className="font-bold font-geist border-black">
-          <Link
-            href={{
-              pathname: "/access",
-            }}>
-            Next
-          </Link>
-        </Button>
+      <div className="row-start-5 flex w-full justify-center flex-row">
+        <PrimaryButton
+          text={"Next"}
+          disable={selectedFrame === ""}
+          href={"/access"}
+        />
       </div>
-      <footer>
-        <div className="caption">
-          {"Made by "}
-          <a
-            href="https://www.linkedin.com/in/samantha-yeung-profile/"
-            target="_blank"
-            rel="noopener noreferrer">
-            Samantha Yeung
-          </a>
-          {" & "}
-          <a
-            href="https://linkedin.com/in/kelvinhkwong"
-            target="_blank"
-            rel="noopener noreferrer">
-            Kelvin Wong
-          </a>
-        </div>
+      <footer className="row-start-6">
+        <Footer />
       </footer>
     </div>
   );
