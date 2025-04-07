@@ -10,13 +10,10 @@ import {
 import { Dispatch, SetStateAction } from "react";
 import styles from "@/styles/Video.module.scss";
 import { AspectRatio } from "./ui/aspect-ratio";
-
-type VideoPropsT = {
-  setTime?: Dispatch<SetStateAction<number>>;
-};
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Define Video as a regular function
-const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
+const Video = forwardRef(function Video({}, ref) {
   const streamRef = useRef<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isStreamReady, setIsStreamReady] = useState(false);
@@ -40,9 +37,6 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
         console.log("Camera permission granted");
         streamRef.current = stream;
         setIsStreamReady(true);
-        if (setTime) {
-          setTime(RESET_TIME); // TODO undo this in prod
-        }
       } catch (error) {
         console.error("Camera permission denied", error);
       }
@@ -56,7 +50,7 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
         streamRef.current.getTracks().forEach((track) => track.stop());
       }
     };
-  }, [setTime]);
+  }, []);
 
   // Expose the getScreenshot method to the parent component
   useImperativeHandle(ref, () => ({
@@ -78,21 +72,25 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
     },
   }));
 
-  return (
-    isStreamReady && (
-      <div className={styles.videoContainer}>
-        <AspectRatio ratio={4 / 5}>
-          <video
-            autoPlay
-            loop
-            ref={videoRef}
-            playsInline
-            muted
-            className="h-full transform scale-x-[-1] object-cover"
-          />
-        </AspectRatio>
-      </div>
-    )
+  return isStreamReady ? (
+    <div className={styles.videoContainer}>
+      <AspectRatio ratio={4 / 5}>
+        <video
+          autoPlay
+          loop
+          ref={videoRef}
+          playsInline
+          muted
+          className="h-full transform scale-x-[-1] object-cover"
+        />
+      </AspectRatio>
+    </div>
+  ) : (
+    <>
+      <AspectRatio ratio={4 / 5}>
+        <Skeleton className="h-full bg-transparent w-full" />
+      </AspectRatio>
+    </>
   );
 });
 

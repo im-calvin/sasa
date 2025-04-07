@@ -2,6 +2,7 @@
 import Footer from "@/components/Footer";
 import PrimaryButton from "@/components/PrimaryButton";
 import { requestCameraPermission } from "@/lib/utils";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function AccessPage() {
@@ -23,7 +24,7 @@ export default function AccessPage() {
       </header>
       <h3 className="row-start-2">STEP 2</h3>
       <h2 className="row-start-3">Camera access</h2>
-      <main className="row-start-4 flex flex-col gap-[32px] items-center sm:items-start">
+      <main className="row-start-4 flex flex-col gap-[32px] items-center">
         {canNext ? (
           <>
             <p>Access granted</p>
@@ -48,7 +49,11 @@ export default function AccessPage() {
         )}
       </main>
       <div className="row-start-5 flex w-full justify-center flex-row">
-        <PrimaryButton text={"Next"} disable={!canNext} href={"/camera"} />
+        <PrimaryButton disable={!canNext}>
+          <Link href="/camera">
+            <h4>Next</h4>
+          </Link>
+        </PrimaryButton>
       </div>
       <footer className="row-start-6">
         <Footer />

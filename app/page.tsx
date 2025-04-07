@@ -1,6 +1,7 @@
 import Footer from "@/components/Footer";
 import PrimaryButton from "@/components/PrimaryButton";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -24,7 +25,11 @@ export default function Home() {
         </p>
       </main>
       <div className="flex gap-4 justify-center flex-row row-start-5">
-        <PrimaryButton text={"Start"} href={"/frame"} />
+        <PrimaryButton>
+          <Link href="/frame">
+            <h4>Start</h4>
+          </Link>
+        </PrimaryButton>
       </div>
       <footer className="row-start-6">
         <Footer />

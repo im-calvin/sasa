@@ -5,6 +5,7 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useFrame } from "@/lib/FrameContext";
 import Footer from "@/components/Footer";
 import PrimaryButton from "@/components/PrimaryButton";
+import Link from "next/link";
 
 export default function FramePage() {
   const { selectedFrame, setSelectedFrame } = useFrame();
@@ -16,7 +17,7 @@ export default function FramePage() {
       </header>
       <h3 className="row-start-2">STEP 1</h3>
       <h2 className="row-start-3">Choose a Frame</h2>
-      <main className="row-start-4 grid grid-cols-2 grid-rows-[20px_1fr] gap-8">
+      <main className="row-start-4 grid grid-cols-2 grid-rows-[1fr_20px] gap-8">
         <AspectRatio ratio={136 / 366}>
           <Image
             onClick={() => {
@@ -53,19 +54,19 @@ export default function FramePage() {
         </AspectRatio>
         <div>
           <h4 className="text-center">LIGHT VER.</h4>
-          <h5 className="text-center">(3 photos)</h5>
+          <p className="text-center">(3 photos)</p>
         </div>
         <div>
-          <h4 className="md text-center">DARK VER.</h4>
-          <h5 className="text-center">(3 photos)</h5>
+          <h4 className="text-center">DARK VER.</h4>
+          <p className="text-center">(3 photos)</p>
         </div>
       </main>
       <div className="row-start-5 flex w-full justify-center flex-row">
-        <PrimaryButton
-          text={"Next"}
-          disable={selectedFrame === ""}
-          href={"/access"}
-        />
+        <PrimaryButton disable={selectedFrame === ""}>
+          <Link href="/access">
+            <h4>Next</h4>
+          </Link>
+        </PrimaryButton>
       </div>
       <footer className="row-start-6">
         <Footer />

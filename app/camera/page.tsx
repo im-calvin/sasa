@@ -14,6 +14,7 @@ export default function CameraPage() {
   const [time, setTime] = useState(-1);
   const videoRef = useRef<{ getScreenshot: () => string } | null>(null);
   const { addScreenshot, screenshots } = useScreenshots();
+  const [isTakingPhotos, setIsTakingPhotos] = useState<boolean>(false);
 
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -29,6 +30,8 @@ export default function CameraPage() {
       // TODO do fancy css animation to appear like a screenshot was taken <3
       addScreenshot(image);
       setTime(RESET_TIME); // reset the timer
+    } else if (time === RESET_TIME) {
+      setIsTakingPhotos(true);
     }
   }, [time, addScreenshot]);
 
@@ -43,25 +46,35 @@ export default function CameraPage() {
       <header className="row-start-1">
         <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
       </header>
-      <h3 className="row-start-2">STEP 3</h3>
-      <h2 className="row-start-3">Start Snapping</h2>
+      {!isTakingPhotos && <h3 className="row-start-2">STEP 3</h3>}
+      <h2 className="row-start-3">
+        {isTakingPhotos ? "Smile!" : "Start Snapping"}
+      </h2>
       <main className="w-4/5 row-start-4 h-full">
         <div className="relative py-9">
-          <VideoMemo ref={videoRef} setTime={setTime} />
+          <VideoMemo ref={videoRef} />
           {time <= 5 && time > 0 && (
             <div className="absolute inset-0 flex items-center justify-center">
               <p className="text-[3rem] text-white">{time}</p>
             </div>
           )}
         </div>
-        <p className="text-center flex justify-center w-full">{`You'll get ${MAX_PHOTOS} photos with ${RESET_TIME} seconds to pose each time`}</p>
+        <p className="text-center flex justify-center w-full">
+          {isTakingPhotos
+            ? `${screenshots.length}/${MAX_PHOTOS}`
+            : `You'll get ${MAX_PHOTOS} photos with ${RESET_TIME} seconds to pose each time`}
+        </p>
       </main>
       <div className="row-start-5 flex w-full justify-center flex-row">
-        <PrimaryButton
-          text={"I'm ready"}
-          disable={screenshots.length === MAX_PHOTOS}
-          href={"/access"}
-        />
+        {!isTakingPhotos && (
+          <PrimaryButton
+            disable={time === -1}
+            onClick={() => {
+              setTime(RESET_TIME);
+            }}>
+            <h4>{"I'm ready"}</h4>
+          </PrimaryButton>
+        )}
       </div>
       <footer className="row-start-6">
         <Footer />
