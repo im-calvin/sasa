@@ -8,7 +8,8 @@ import {
   useImperativeHandle,
 } from "react";
 import { Dispatch, SetStateAction } from "react";
-// @ts-ignore because we are just doing vanilla css stuff :D
+// because we are just doing vanilla css stuff :D
+// @ts-expect-error
 import styles from "@/styles/Video.module.scss";
 
 type VideoPropsT = {
