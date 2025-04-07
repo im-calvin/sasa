@@ -15,7 +15,7 @@ export default function FramePage() {
         <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
       </header>
       <h3 className="row-start-2">STEP 1</h3>
-      <h2 className="row-start-3">Choose a frame</h2>
+      <h2 className="row-start-3">Choose a Frame</h2>
       <main className="row-start-4 grid grid-cols-2 grid-rows-[20px_1fr] gap-8">
         <AspectRatio ratio={136 / 366}>
           <Image
