@@ -11,7 +11,7 @@ import { Dispatch, SetStateAction } from "react";
 import styles from "@/styles/Video.module.scss";
 
 type VideoPropsT = {
-  setTime: Dispatch<SetStateAction<number>>;
+  setTime?: Dispatch<SetStateAction<number>>;
 };
 
 // Define Video as a regular function
@@ -39,7 +39,9 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
         console.log("Camera permission granted");
         streamRef.current = stream;
         setIsStreamReady(true);
-        setTime(RESET_TIME);
+        if (setTime) {
+          setTime(RESET_TIME);
+        }
       } catch (error) {
         console.error("Camera permission denied", error);
       }

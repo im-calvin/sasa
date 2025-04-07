@@ -45,7 +45,7 @@ export default function AccessPage() {
           className="font-bold font-geist border-black">
           <Link
             href={{
-              pathname: "/access",
+              pathname: "/preview",
             }}>
             Next
           </Link>
