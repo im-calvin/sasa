@@ -1,11 +1,13 @@
+import Footer from "@/components/Footer";
+import PrimaryButton from "@/components/PrimaryButton";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-instrument">
-      <header>
+    <div className="grid grid-rows-[20px_1fr_20px_10px] items-center justify-items-center min-h-screen p-8 gap-8 sm:p-20">
+      <header className="row-start-1">
         <h5>IDEA GRAD SHOW 2025</h5>
       </header>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -18,37 +20,16 @@ export default function Home() {
           height={38}
           priority
         />
-        <div className="body text-center">
-          Take some photos and enjoy these digital frames I designed~
-        </div>
-        <div className="flex gap-4 items-center flex-row">
-          <Button
-            asChild
-            variant="outline"
-            className="font-bold font-geist border-black p-[10px]">
-            <Link href="/frame">
-              <h4>Start</h4>
-            </Link>
-          </Button>
+        <div className="body text-center w-4/5">
+          Thanks for coming! Take some photos and enjoy these digital frames I
+          designed~
         </div>
       </main>
+      <div className="flex gap-4 justify-center flex-row">
+        <PrimaryButton text={"Start"} />
+      </div>
       <footer>
-        <div className="caption">
-          {"Made by "}
-          <a
-            href="https://www.linkedin.com/in/samantha-yeung-profile/"
-            target="_blank"
-            rel="noopener noreferrer">
-            Samantha Yeung
-          </a>
-          {" & "}
-          <a
-            href="https://linkedin.com/in/kelvinhkwong"
-            target="_blank"
-            rel="noopener noreferrer">
-            Kelvin Wong
-          </a>
-        </div>
+        <Footer />
       </footer>
     </div>
   );
