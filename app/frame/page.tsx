@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,7 +11,9 @@ export default function FramePage() {
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-instrument">
-      <header className="font-geist font-light">SAMANTHA'S PHOTO CORNER</header>
+      <header className="font-geist font-light">
+        {"SAMANTHA'S PHOTO CORNER"}
+      </header>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h3 className="font-geist font-light">STEP 1</h3>
         <h2 className="font-instrument text-red-300 italic">Choose a frame</h2>

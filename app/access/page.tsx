@@ -19,7 +19,7 @@ export default function AccessPage() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-instrument">
       <header className="font-geist font-light row-start-1">
-        SAMANTHA'S PHOTO CORNER
+        {"SAMANTHA'S PHOTO CORNER"}
       </header>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h3 className="font-geist font-light">STEP 2</h3>
@@ -30,6 +30,7 @@ export default function AccessPage() {
         <Button onClick={() => requestCameraPermission()} variant={"outline"}>
           Request Access
         </Button>
+        n
       </main>
       <div className="row-start-3 flex w-full justify-between flex-row sm:flex-row">
         <Button
