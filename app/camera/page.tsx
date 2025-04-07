@@ -38,7 +38,7 @@ export default function CameraPage() {
   }, [screenshots, router]);
 
   return (
-    <div className="flex items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="flex items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <VideoMemo ref={videoRef} setTime={setTime} />
       {time <= 5 && time > 0 && (
         <div className="absolute inset-0 flex items-center justify-center">

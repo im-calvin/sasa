@@ -28,17 +28,7 @@ export default function Home() {
           </Button>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://www.linkedin.com/in/samantha-yeung-profile/"
-          target="_blank"
-          rel="noopener noreferrer">
-          <h4 className="font-light font-geist text-center text-sm">
-            Made with {"<3"} by Samantha Yeung & Kelvin Wong
-          </h4>
-        </a>
-      </footer>
+
     </div>
   );
 }

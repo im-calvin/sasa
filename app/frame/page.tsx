@@ -74,7 +74,7 @@ export default function FramePage() {
           className="font-bold font-geist border-black">
           <Link
             href={{
-              pathname: "/camera",
+              pathname: "/access",
             }}>
             Next
           </Link>

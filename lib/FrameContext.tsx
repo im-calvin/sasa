@@ -1,5 +1,11 @@
 "use client";
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 type FrameContextType = {
   selectedFrame: "" | "light" | "dark";
@@ -9,7 +15,20 @@ type FrameContextType = {
 const FrameContext = createContext<FrameContextType | undefined>(undefined);
 
 export function FrameProvider({ children }: { children: ReactNode }) {
-  const [selectedFrame, setSelectedFrame] = useState<"" | "light" | "dark">("");
+  const [selectedFrame, setSelectedFrame] = useState<"" | "light" | "dark">(
+    () => {
+      // Initialize from localStorage or default to ""
+      if (typeof window !== "undefined") {
+        return (localStorage.getItem("frame") as "" | "light" | "dark") || "";
+      }
+      return "";
+    }
+  );
+
+  useEffect(() => {
+    // Update localStorage whenever selectedFrame changes
+    localStorage.setItem("frame", selectedFrame);
+  }, [selectedFrame]);
 
   return (
     <FrameContext.Provider value={{ selectedFrame, setSelectedFrame }}>
