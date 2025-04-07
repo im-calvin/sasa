@@ -4,6 +4,8 @@ import { Video } from "@/components/Video";
 import { MAX_PHOTOS, RESET_TIME } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import { useScreenshots } from "@/lib/ScreenshotsContext";
+import PrimaryButton from "@/components/PrimaryButton";
+import Footer from "@/components/Footer";
 
 const VideoMemo = memo(Video); // memoize so that video component doesn't rerender and flash
 
@@ -31,20 +33,39 @@ export default function CameraPage() {
   }, [time, addScreenshot]);
 
   useEffect(() => {
-    console.log(screenshots.length);
     if (screenshots.length === MAX_PHOTOS) {
       router.push("/photos");
     }
   }, [screenshots, router]);
 
   return (
-    <div className="flex items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <VideoMemo ref={videoRef} setTime={setTime} />
-      {time <= 5 && time > 0 && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-4xl font-bold text-white">{time}</div>
+    <div className="grid grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center min-h-screen max-h-screen h-screen p-8 gap-8 sm:p-20">
+      <header className="row-start-1">
+        <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
+      </header>
+      <h3 className="row-start-2">STEP 3</h3>
+      <h2 className="row-start-3">Start Snapping</h2>
+      <main className="w-4/5 row-start-4 h-full">
+        <div className="relative py-9">
+          <VideoMemo ref={videoRef} setTime={setTime} />
+          {time <= 5 && time > 0 && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <p className="text-[3rem] text-white">{time}</p>
+            </div>
+          )}
         </div>
-      )}
+        <p className="text-center flex justify-center w-full">{`You'll get ${MAX_PHOTOS} photos with ${RESET_TIME} seconds to pose each time`}</p>
+      </main>
+      <div className="row-start-5 flex w-full justify-center flex-row">
+        <PrimaryButton
+          text={"I'm ready"}
+          disable={screenshots.length === MAX_PHOTOS}
+          href={"/access"}
+        />
+      </div>
+      <footer className="row-start-6">
+        <Footer />
+      </footer>
     </div>
   );
 }

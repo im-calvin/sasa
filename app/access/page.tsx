@@ -48,7 +48,7 @@ export default function AccessPage() {
         )}
       </main>
       <div className="row-start-5 flex w-full justify-center flex-row">
-        <PrimaryButton text={"Next"} disable={!canNext} href={"/access"} />
+        <PrimaryButton text={"Next"} disable={!canNext} href={"/camera"} />
       </div>
       <footer className="row-start-6">
         <Footer />

@@ -9,6 +9,7 @@ import {
 } from "react";
 import { Dispatch, SetStateAction } from "react";
 import styles from "@/styles/Video.module.scss";
+import { AspectRatio } from "./ui/aspect-ratio";
 
 type VideoPropsT = {
   setTime?: Dispatch<SetStateAction<number>>;
@@ -40,7 +41,7 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
         streamRef.current = stream;
         setIsStreamReady(true);
         if (setTime) {
-          setTime(RESET_TIME);
+          setTime(RESET_TIME); // TODO undo this in prod
         }
       } catch (error) {
         console.error("Camera permission denied", error);
@@ -77,19 +78,21 @@ const Video = forwardRef(function Video({ setTime }: VideoPropsT, ref) {
     },
   }));
 
-  return isStreamReady ? (
-    <div className={styles.videoContainer}>
-      <video
-        autoPlay
-        loop
-        ref={videoRef}
-        playsInline
-        muted
-        className="w-full transform scale-x-[-1]"
-      />
-    </div>
-  ) : (
-    <p>Please allow camera access</p>
+  return (
+    isStreamReady && (
+      <div className={styles.videoContainer}>
+        <AspectRatio ratio={4 / 5}>
+          <video
+            autoPlay
+            loop
+            ref={videoRef}
+            playsInline
+            muted
+            className="h-full transform scale-x-[-1] object-cover"
+          />
+        </AspectRatio>
+      </div>
+    )
   );
 });
 
