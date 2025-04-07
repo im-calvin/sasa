@@ -7,7 +7,7 @@ export default function Home() {
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-instrument">
       <header className="font-geist font-light">IDEA GRAD SHOW 2025</header>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h1>Samantha's photo corner text goes here :D</h1>
+        <h1 className="font-instrument text-red-300 italic">Photo Corner</h1>
         <Image
           className=""
           src="/next.svg"
@@ -24,7 +24,7 @@ export default function Home() {
             asChild
             variant="outline"
             className="font-bold font-geist border-black">
-            <Link href="/camera">Start</Link>
+            <Link href="/frame">Start</Link>
           </Button>
         </div>
       </main>
