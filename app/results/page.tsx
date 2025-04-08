@@ -1,12 +1,14 @@
 "use client";
 import Footer from "@/components/Footer";
+import { Loading } from "@/components/Loading";
 import PrimaryButton from "@/components/PrimaryButton";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function ResultsPage() {
+function ResultsContent() {
   const router = useRouter();
   const params = useSearchParams();
   if (!params.has("url")) {
@@ -33,6 +35,7 @@ export default function ResultsPage() {
       </main>
       <div className="row-start-5 flex w-full justify-center flex-row">
         <PrimaryButton>
+          {/* TODO make this share properly */}
           <Link href={url}>
             <h4>Download & Share</h4>
           </Link>
@@ -42,5 +45,13 @@ export default function ResultsPage() {
         <Footer />
       </footer>
     </div>
+  );
+}
+
+export default function ResultsPage() {
+  return (
+    <Suspense fallback={<Loading text={"Generating photostrip!"} />}>
+      <ResultsContent />
+    </Suspense>
   );
 }

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useScreenshots } from "@/lib/ScreenshotsContext";
 import PrimaryButton from "@/components/PrimaryButton";
 import Footer from "@/components/Footer";
-import Image from "next/image";
+import { Loading } from "@/components/Loading";
 
 const VideoMemo = memo(Video); // memoize so that video component doesn't rerender and flash
 
@@ -53,10 +53,7 @@ export default function CameraPage() {
       </header>
       {isLoading ? (
         <div className="row-start-4">
-          <h2 className="w-full text-center flex justify-content">
-            {"Lookin' goooood ;)"}
-          </h2>
-          <Image src="/loading.gif" alt="Loading..." width={300} height={300} />
+          <Loading text={"Lookin' goooood ;)"} />
         </div>
       ) : (
         <>

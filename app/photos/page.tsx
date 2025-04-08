@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import NumberedCircle from "@/components/NumberedCircle";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useRouter } from "next/navigation";
+import { Loading } from "@/components/Loading";
 
 export default function PhotosPage() {
   const { screenshots } = useScreenshots();
@@ -56,10 +57,7 @@ export default function PhotosPage() {
       </header>
       {isLoading ? (
         <div className="row-start-4">
-          <h2 className="w-full text-center flex justify-content">
-            {"Great choices!"}
-          </h2>
-          <Image src="/loading.gif" alt="Loading..." width={300} height={300} />
+          <Loading text={"Great choices!"} />
         </div>
       ) : (
         <>
