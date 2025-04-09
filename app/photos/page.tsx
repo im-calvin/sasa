@@ -48,6 +48,10 @@ export default function PhotosPage() {
     const params = new URLSearchParams();
     params.set("url", url);
     router.push(`/results?${params.toString()}`);
+    // maybe we should just wait for the gif to spin a little :3
+    // setTimeout(() => {
+    //   router.push(`/results?${params.toString()}`);
+    // }, GIF_DURATION);
   }
 
   return (
