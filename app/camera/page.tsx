@@ -47,7 +47,7 @@ export default function CameraPage() {
   }, [screenshots, router]);
 
   return (
-    <div className="grid grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center min-h-screen max-h-screen h-screen p-8 gap-8 sm:p-20">
+    <div className="grid grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center min-h-svh max-h-dvh p-8 gap-8 sm:p-20">
       <header className="row-start-1">
         <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
       </header>
@@ -61,7 +61,7 @@ export default function CameraPage() {
           <h2 className="row-start-3">
             {isTakingPhotos ? "Smile!" : "Start Snapping"}
           </h2>
-          <main className="w-4/5 row-start-4 h-full">
+          <main className="w-4/5 row-start-4">
             <div className="relative py-9">
               <VideoMemo ref={videoRef} />
               {time <= 5 && time > 0 && (

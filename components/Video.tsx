@@ -79,7 +79,7 @@ const Video = forwardRef(function Video({}, ref) {
           ref={videoRef}
           playsInline
           muted
-          className="h-full transform scale-x-[-1] object-cover"
+          className="h-full transform scale-x-[-1] object-cover mx-auto"
         />
       </AspectRatio>
     </div>
