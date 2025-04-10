@@ -47,7 +47,7 @@ export default function CameraPage() {
   }, [screenshots, router]);
 
   return (
-    <div className="grid grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center min-h-svh max-h-dvh p-8 gap-8 sm:p-20">
+    <div className="grid max-h-dvh min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-8 p-8">
       <header className="row-start-1">
         <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
       </header>
@@ -61,8 +61,8 @@ export default function CameraPage() {
           <h2 className="row-start-3">
             {isTakingPhotos ? "Smile!" : "Start Snapping"}
           </h2>
-          <main className="w-4/5 row-start-4">
-            <div className="relative py-9">
+          <main className="row-start-4 w-full">
+            <div className="relative h-full w-full py-6">
               <VideoMemo ref={videoRef} />
               {time <= 5 && time > 0 && (
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -70,19 +70,20 @@ export default function CameraPage() {
                 </div>
               )}
             </div>
-            <p className="text-center flex justify-center w-full">
+            <p className="h-fit-content flex w-full justify-center text-center">
               {isTakingPhotos
                 ? `${screenshots.length}/${MAX_PHOTOS}`
                 : `You'll get ${MAX_PHOTOS} photos with ${RESET_TIME} seconds to pose each time`}
             </p>
           </main>
-          <div className="row-start-5 flex w-full justify-center flex-row">
+          <div className="row-start-5 flex w-full flex-row justify-center">
             {!isTakingPhotos && (
               <PrimaryButton
                 disable={time === -1}
                 onClick={() => {
                   setTime(RESET_TIME);
-                }}>
+                }}
+              >
                 <h4>{"I'm ready"}</h4>
               </PrimaryButton>
             )}
