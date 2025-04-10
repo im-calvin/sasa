@@ -25,7 +25,6 @@ export default function CameraPage() {
   const [isTakingPhotos, setIsTakingPhotos] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [flash, setFlash] = useState<boolean>(false);
-  const aspectRatioRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -35,14 +34,14 @@ export default function CameraPage() {
   }, []);
 
   useEffect(() => {
-    if (time === 0 && videoRef.current && aspectRatioRef.current) {
+    if (time === 0 && videoRef.current) {
       setFlash(true);
       setTimeout(() => {
         setFlash(false);
       }, FLASH_DURATION);
 
       // take a snapshot
-      const image = videoRef.current.getScreenshot(aspectRatioRef.current);
+      const image = videoRef.current.getScreenshot();
 
       addScreenshot(image);
       setTime(RESET_TIME); // reset the timer
@@ -61,19 +60,13 @@ export default function CameraPage() {
   }, [screenshots, router]);
 
   return (
-    <div className="relative grid max-h-lvh min-h-lvh grid-rows-[auto_auto_auto] items-center justify-items-center overflow-hidden">
+    <div className="grid max-h-dvh min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-y-8 py-8">
       {flash && (
         <div className="animate-fade-out bg-background pointer-events-none absolute inset-0 z-99 min-h-lvh opacity-100" />
       )}
-      {!isLoading && (
-        <>
-          {/* top banner */}
-          <div className="row-start-1 h-full w-full bg-black" />
-          {/* bottom banner */}
-          <div className="row-start-3 h-full w-full bg-black" />
-        </>
-      )}
-      {/* actual content */}
+      <header className="row-start-1">
+        <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
+      </header>
       {isLoading ? (
         <div className="row-start-2">
           <Loading text={"Great choices!"} />
