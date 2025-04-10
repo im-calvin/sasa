@@ -8,7 +8,7 @@ type ScreenshotsContextType = {
 };
 
 const ScreenshotsContext = createContext<ScreenshotsContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export function ScreenshotsProvider({ children }: { children: ReactNode }) {
@@ -24,7 +24,8 @@ export function ScreenshotsProvider({ children }: { children: ReactNode }) {
 
   return (
     <ScreenshotsContext.Provider
-      value={{ screenshots, addScreenshot, clearScreenshots }}>
+      value={{ screenshots, addScreenshot, clearScreenshots }}
+    >
       {children}
     </ScreenshotsContext.Provider>
   );

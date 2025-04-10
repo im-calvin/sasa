@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     if (!images || !Array.isArray(images) || images.length === 0) {
       return NextResponse.json(
         { error: "No images provided" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     const backgroundImagePath = path.join(
       process.cwd(),
       "public",
-      "background.png"
+      "background.png",
     );
     const backgroundImage = await sharp(backgroundImagePath).toBuffer();
 
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       images.map(async (image: string) => {
         const buffer = Buffer.from(image.split(",")[1], "base64"); // Decode base64
         return sharp(buffer).resize(500, 500).toBuffer(); // Resize to uniform dimensions
-      })
+      }),
     );
 
     // Composite the images vertically
@@ -37,7 +37,7 @@ export async function POST(req: Request) {
           input: buffer,
           top: 500 * index,
           left: 0,
-        }))
+        })),
       )
       .png()
       .toBuffer();
@@ -50,7 +50,7 @@ export async function POST(req: Request) {
     console.error("Error processing images:", error);
     return NextResponse.json(
       { error: "Failed to process images" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

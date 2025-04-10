@@ -11,7 +11,7 @@ export default function FramePage() {
   const { selectedFrame, setSelectedFrame } = useFrame();
 
   return (
-    <div className="grid grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center min-h-svh p-8 gap-8 sm:p-20">
+    <div className="grid min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-8 p-8 sm:p-20">
       <header className="row-start-1">
         <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
       </header>
@@ -23,12 +23,9 @@ export default function FramePage() {
             onClick={() => {
               setSelectedFrame("light");
             }}
-            className={`
-              p-2 box-content
-              ${
-                selectedFrame === "light" ? "border-2 border-(--saman-red)" : ""
-              }
-              `}
+            className={`box-content p-2 ${
+              selectedFrame === "light" ? "border-2 border-(--saman-red)" : ""
+            } `}
             src="/next.svg"
             alt="Digital Frames"
             width={180}
@@ -41,10 +38,7 @@ export default function FramePage() {
             onClick={() => {
               setSelectedFrame("dark");
             }}
-            className={`
-              p-2 box-content
-              ${selectedFrame === "dark" ? "border-2 border-(--saman-red)" : ""}
-              `}
+            className={`box-content p-2 ${selectedFrame === "dark" ? "border-2 border-(--saman-red)" : ""} `}
             src="/next.svg"
             alt="Digital Frames"
             width={180}
@@ -61,7 +55,7 @@ export default function FramePage() {
           <p className="text-center">(3 photos)</p>
         </div>
       </main>
-      <div className="row-start-5 flex w-full justify-center flex-row">
+      <div className="row-start-5 flex w-full flex-row justify-center">
         <PrimaryButton disable={selectedFrame === ""}>
           <Link href="/access">
             <h4>Next</h4>

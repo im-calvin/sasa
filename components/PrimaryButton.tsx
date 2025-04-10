@@ -20,7 +20,8 @@ export default function PrimaryButton({
       asChild={!disable} // the disabled doesn't work without this, ref: https://github.com/shadcn-ui/ui/issues/1894#issuecomment-2089988087
       disabled={disable}
       className={`border-black p-[10px] hover:cursor-pointer ${className}`}
-      onClick={onClick}>
+      onClick={onClick}
+    >
       {children}
     </Button>
   );

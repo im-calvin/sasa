@@ -7,7 +7,7 @@ interface LoadingProps {
 export function Loading({ text }: LoadingProps) {
   return (
     <>
-      <h2 className="w-full text-center flex justify-content">{text}</h2>
+      <h2 className="justify-content flex w-full text-center">{text}</h2>
       <Image src="/loading.gif" alt="Loading..." width={300} height={300} />
     </>
   );

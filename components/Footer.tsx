@@ -8,7 +8,8 @@ export default function Footer() {
         href="https://www.linkedin.com/in/samantha-yeung-profile/"
         target="_blank"
         rel="noopener noreferrer"
-        className="underline">
+        className="underline"
+      >
         Samantha Yeung
       </a>
       {" & "}
@@ -16,7 +17,8 @@ export default function Footer() {
         href="https://linkedin.com/in/kelvinhkwong"
         target="_blank"
         rel="noopener noreferrer"
-        className="underline">
+        className="underline"
+      >
         Kelvin Wong
       </a>
     </div>

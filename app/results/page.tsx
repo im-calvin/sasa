@@ -70,7 +70,7 @@ function ResultsContent() {
   }
 
   return (
-    <div className="grid grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center min-h-svh p-8 gap-8 sm:p-20">
+    <div className="grid min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-8 p-8 sm:p-20">
       <header className="row-start-1">
         <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
       </header>
@@ -85,7 +85,7 @@ function ResultsContent() {
           />
         </AspectRatio>
       </main>
-      <div className="row-start-5 flex w-full justify-center flex-row">
+      <div className="row-start-5 flex w-full flex-row justify-center">
         <PrimaryButton onClick={handleShare}>
           <h4>Download & Share</h4>
         </PrimaryButton>

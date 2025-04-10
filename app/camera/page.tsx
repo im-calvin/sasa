@@ -1,7 +1,12 @@
 "use client";
 import { memo, useEffect, useRef, useState } from "react";
 import { Video } from "@/components/Video";
-import { GIF_DURATION, MAX_PHOTOS, RESET_TIME } from "@/lib/constants";
+import {
+  FLASH_DURATION,
+  GIF_DURATION,
+  MAX_PHOTOS,
+  RESET_TIME,
+} from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import { useScreenshots } from "@/lib/ScreenshotsContext";
 import PrimaryButton from "@/components/PrimaryButton";
@@ -30,6 +35,15 @@ export default function CameraPage() {
       // take a snapshot
       const image = videoRef.current.getScreenshot();
       // TODO do fancy css animation to appear like a screenshot was taken <3
+      // Add a flash animation when screenshot is taken
+      const flashElement = document.querySelector(".flash");
+      if (flashElement) {
+        flashElement.classList.add("flashing");
+        setTimeout(() => {
+          flashElement.classList.remove("flashing");
+        }, FLASH_DURATION); // Short duration for the flash effect
+      }
+
       addScreenshot(image);
       setTime(RESET_TIME); // reset the timer
     } else if (time === RESET_TIME) {
@@ -47,7 +61,7 @@ export default function CameraPage() {
   }, [screenshots, router]);
 
   return (
-    <div className="grid max-h-dvh min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-8 p-8">
+    <div className="grid max-h-dvh min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-y-8 py-8">
       <header className="row-start-1">
         <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
       </header>
@@ -62,7 +76,7 @@ export default function CameraPage() {
             {isTakingPhotos ? "Smile!" : "Start Snapping"}
           </h2>
           <main className="row-start-4 w-full">
-            <div className="relative h-full w-full py-6">
+            <div className="relative py-6">
               <VideoMemo ref={videoRef} />
               {time <= 5 && time > 0 && (
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -70,11 +84,11 @@ export default function CameraPage() {
                 </div>
               )}
             </div>
-            <p className="h-fit-content flex w-full justify-center text-center">
+            {/* <p className="h-fit-content flex w-full justify-center text-center">
               {isTakingPhotos
                 ? `${screenshots.length}/${MAX_PHOTOS}`
                 : `You'll get ${MAX_PHOTOS} photos with ${RESET_TIME} seconds to pose each time`}
-            </p>
+            </p> */}
           </main>
           <div className="row-start-5 flex w-full flex-row justify-center">
             {!isTakingPhotos && (

@@ -22,7 +22,7 @@ export function FrameProvider({ children }: { children: ReactNode }) {
         return (localStorage.getItem("frame") as "" | "light" | "dark") || "";
       }
       return "";
-    }
+    },
   );
 
   useEffect(() => {

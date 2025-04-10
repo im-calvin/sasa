@@ -55,7 +55,7 @@ export default function PhotosPage() {
   }
 
   return (
-    <div className="grid grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center min-h-svh p-8 gap-8 sm:p-20">
+    <div className="grid min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-8 p-8 sm:p-20">
       <header className="row-start-1">
         <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
       </header>
@@ -67,16 +67,17 @@ export default function PhotosPage() {
         <>
           <h3 className="row-start-2">STEP 4</h3>
           <h2 className="row-start-3">{`Choose Top ${NUM_PHOTOS}`}</h2>
-          <main className="row-start-4 grid grid-cols-2 gap-4 w-4/5">
+          <main className="row-start-4 grid w-4/5 grid-cols-2 gap-4">
             {screenshots.map((screenshot, index) => (
               <div
                 key={index}
                 className="relative"
                 onClick={() => {
                   toggleSelection(screenshot);
-                }}>
+                }}
+              >
                 <NumberedCircle
-                  className={`absolute justify-center items-center inset-0 z-1 ${
+                  className={`absolute inset-0 z-1 items-center justify-center ${
                     selectedImages.includes(screenshot) ? "flex" : "hidden"
                   }`}
                   num={
@@ -90,7 +91,7 @@ export default function PhotosPage() {
                   <Image
                     src={screenshot} // png string
                     alt={`Screenshot ${index + 1}`}
-                    className="object-cover h-full w-full"
+                    className="h-full w-full object-cover"
                     width={500} // these dont do anything idk what they're for tbh, but if u get rid of them then next.js complains so \o/
                     height={500}
                   />
@@ -98,12 +99,13 @@ export default function PhotosPage() {
               </div>
             ))}
           </main>
-          <div className="row-start-5 flex w-full justify-center flex-row">
+          <div className="row-start-5 flex w-full flex-row justify-center">
             <PrimaryButton
               disable={selectedImages.length < NUM_PHOTOS}
               onClick={() => {
                 generatePhotostrip();
-              }}>
+              }}
+            >
               {/* TODO there's some weird styling thing here. without a <Link/> the regular variant looks weird  */}
               {/* This works but its pretty inelegant */}
               {/* <span className="font-geist font-bold text-lg"> */}

@@ -11,8 +11,8 @@ export default function NumberedCircle({
 }: NumberedCircleProps) {
   return (
     <div className={`${className}`}>
-      <Circle className="text-black w-24 h-24" strokeWidth={0.5} fill="white" />
-      <span className="font-geist absolute top-1/2 left-1/2 font-light text-6xl text-black -translate-1/2">
+      <Circle className="h-24 w-24 text-black" strokeWidth={0.5} fill="white" />
+      <span className="font-geist absolute top-1/2 left-1/2 -translate-1/2 text-6xl font-light text-black">
         {num}
       </span>
     </div>

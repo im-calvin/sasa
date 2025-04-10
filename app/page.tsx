@@ -5,11 +5,11 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center min-h-svh p-8 gap-8 sm:p-20">
+    <div className="grid min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-8 p-8 sm:p-20">
       <header className="row-start-1">
         <h5>IDEA GRAD SHOW 2025</h5>
       </header>
-      <main className="flex flex-col gap-[32px] row-start-4 items-center">
+      <main className="row-start-4 flex flex-col items-center gap-[32px]">
         <h1>Photo Corner</h1>
         <Image
           className=""
@@ -19,12 +19,12 @@ export default function Home() {
           height={38}
           priority
         />
-        <p className="text-center w-4/5">
+        <p className="w-4/5 text-center">
           Thanks for coming! Take some photos and enjoy these digital frames I
           designed~
         </p>
       </main>
-      <div className="flex gap-4 justify-center flex-row row-start-5">
+      <div className="row-start-5 flex flex-row justify-center gap-4">
         <PrimaryButton>
           <Link href="/frame">
             <h4>Start</h4>

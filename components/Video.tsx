@@ -11,7 +11,7 @@ import { AspectRatio } from "./ui/aspect-ratio";
 import { Skeleton } from "@/components/ui/skeleton";
 
 // Define Video as a regular function
-const Video = forwardRef(function Video({}, ref) {
+export const Video = forwardRef(function Video({}, ref) {
   const streamRef = useRef<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isStreamReady, setIsStreamReady] = useState(false);
@@ -79,17 +79,15 @@ const Video = forwardRef(function Video({}, ref) {
           ref={videoRef}
           playsInline
           muted
-          className="h-full transform scale-x-[-1] object-cover mx-auto"
+          className="mx-auto h-full scale-x-[-1] transform object-cover"
         />
       </AspectRatio>
     </div>
   ) : (
     <>
       <AspectRatio ratio={4 / 5}>
-        <Skeleton className="h-full bg-transparent w-full" />
+        <Skeleton className="h-full w-full bg-transparent" />
       </AspectRatio>
     </>
   );
 });
-
-export { Video };

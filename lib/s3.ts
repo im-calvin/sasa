@@ -8,7 +8,7 @@ import { AWS_BUCKET_HOSTNAME } from "./constants";
 const client = new S3Client({ region: process.env.AWS_REGION });
 
 export async function putImage(
-  image: Buffer<ArrayBufferLike>
+  image: Buffer<ArrayBufferLike>,
 ): Promise<string> {
   const key = `samanthas-photo-corner-${Date.now()}.png`;
   const params: PutObjectRequest = {
