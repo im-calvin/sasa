@@ -53,17 +53,56 @@ export const Video = forwardRef(function Video({}, ref) {
   // Expose the getScreenshot method to the parent component
   useImperativeHandle(ref, () => ({
     // returns a image/png string
-    getScreenshot() {
-      if (!streamRef.current || !videoRef.current) {
+    getScreenshot(aspectRatioElement: HTMLElement) {
+      if (!streamRef.current || !videoRef.current || !aspectRatioElement) {
         return;
       }
 
       const canvas = document.createElement("canvas");
       const video = videoRef.current;
       const context = canvas.getContext("2d");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      context?.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // get the rectangle of the aspectratio component (non-hidden)
+      const aspectRect = aspectRatioElement.getBoundingClientRect();
+      const videoRect = video.getBoundingClientRect();
+
+      // Calculate the overlap region
+      const overlapX = Math.max(0, aspectRect.left - videoRect.left);
+      const overlapY = Math.max(0, aspectRect.top - videoRect.top);
+      const overlapWidth = Math.min(
+        aspectRect.width,
+        videoRect.width - overlapX,
+      );
+      const overlapHeight = Math.min(
+        aspectRect.height,
+        videoRect.height - overlapY,
+      );
+
+      // Set canvas dimensions to the overlap region
+      canvas.width = overlapWidth;
+      canvas.height = overlapHeight;
+
+      // Scale the coordinates to match the video dimensions
+      const scaleX = video.videoWidth / videoRect.width;
+      const scaleY = video.videoHeight / videoRect.height;
+
+      const sourceX = overlapX * scaleX;
+      const sourceY = overlapY * scaleY;
+      const sourceWidth = overlapWidth * scaleX;
+      const sourceHeight = overlapHeight * scaleY;
+
+      // Draw the cropped video frame onto the canvas
+      context?.drawImage(
+        video,
+        sourceX,
+        sourceY,
+        sourceWidth,
+        sourceHeight,
+        0,
+        0,
+        canvas.width,
+        canvas.height,
+      );
 
       const imageDataUrl = canvas.toDataURL("image/png");
       return imageDataUrl;
@@ -71,17 +110,16 @@ export const Video = forwardRef(function Video({}, ref) {
   }));
 
   return isStreamReady ? (
-    <div className={styles.videoContainer}>
-      <AspectRatio ratio={4 / 5}>
-        <video
-          autoPlay
-          loop
-          ref={videoRef}
-          playsInline
-          muted
-          className="mx-auto h-full scale-x-[-1] transform object-cover"
-        />
-      </AspectRatio>
+    <div className={`${styles.videoContainer}`}>
+      <video
+        autoPlay
+        loop
+        ref={videoRef}
+        playsInline
+        muted
+        className="h-lvh scale-x-[-1] transform object-cover"
+        controls={false}
+      />
     </div>
   ) : (
     <>
