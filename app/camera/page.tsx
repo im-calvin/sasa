@@ -10,7 +10,6 @@ import {
 import { useRouter } from "next/navigation";
 import { useScreenshots } from "@/lib/ScreenshotsContext";
 import PrimaryButton from "@/components/PrimaryButton";
-import Footer from "@/components/Footer";
 import { Loading } from "@/components/Loading";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
