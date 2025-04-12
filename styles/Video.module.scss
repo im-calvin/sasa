@@ -2,21 +2,9 @@
   video::-webkit-media-controls-start-playback-button {
     display: none !important;
     -webkit-appearance: none;
+  }  
+  video::-webkit-media-controls {
+    display: none !important;
+    -webkit-appearance: none;
   }
-}
-
-.flash {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: white;
-  opacity: 1;
-  z-index: 9999;
-  transition: opacity 0.5s ease-out;
-}
-
-.flash.flashing {
-  opacity: 1;
 }
