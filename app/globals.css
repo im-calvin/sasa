@@ -195,4 +195,6 @@
       opacity: 0;
     }
   }
+
+  --aspect-frame: 1080 / 3840;
 }

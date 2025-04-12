@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useFrame } from "@/lib/FrameContext";
 import Footer from "@/components/Footer";
 import PrimaryButton from "@/components/PrimaryButton";
@@ -13,19 +12,19 @@ export default function FramePage() {
   return (
     // top 3 rows is 22.6%
     // bottom 2 rows is 13%
-    <div className="grid max-h-svh min-h-svh grid-rows-[20svh_50svh_20svh] items-center justify-items-center">
+    <div className="grid max-h-svh min-h-svh grid-rows-[23svh_64svh_13svh] items-center justify-items-center">
       <header className="row-start-1 flex flex-col items-center justify-center">
         <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
-        <h3 className="pt-7">STEP 1</h3>
+      <h3 className="pt-7">STEP 1</h3>
         <h2 className="pt-2">Choose a Frame</h2>
       </header>
-      <main className="row-start-2 grid h-full w-3/5 grid-cols-2 justify-center-safe gap-8 px-12">
-        <AspectRatio ratio={1080 / 3840} className="h-full">
+      <main className="row-start-2 grid h-full grid-cols-2 justify-center-safe gap-8">
+        <div className="relative h-full aspect-frame">
           <Image
             onClick={() => {
               setSelectedFrame("light");
             }}
-            className={`object-contain ${
+            className={`object-cover ${
               selectedFrame === "light" ? "border-2 border-(--saman-red)" : ""
             } `}
             src="/frame2.png"
@@ -33,19 +32,19 @@ export default function FramePage() {
             fill
             priority
           />
-        </AspectRatio>
-        <AspectRatio ratio={1080 / 3840} className="h-full">
+        </div>
+        <div className="relative h-full aspect-frame">
           <Image
             onClick={() => {
               setSelectedFrame("dark");
             }}
-            className={`object-contain ${selectedFrame === "dark" ? "border-2 border-(--saman-red)" : ""} `}
+            className={`object-cover ${selectedFrame === "dark" ? "border-2 border-(--saman-red)" : ""} `}
             src="/frame2.png"
             alt="Digital Frames"
             fill
             priority
           />
-        </AspectRatio>
+        </div>
       </main>
       <div className="row-start-3 flex w-full flex-col items-center justify-start">
         <PrimaryButton disable={selectedFrame === ""}>
