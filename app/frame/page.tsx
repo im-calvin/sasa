@@ -11,60 +11,50 @@ export default function FramePage() {
   const { selectedFrame, setSelectedFrame } = useFrame();
 
   return (
-    <div className="grid min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-8 p-8 sm:p-20">
-      <header className="row-start-1">
-        <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
+    // top 3 rows is 22.6%
+    // bottom 2 rows is 13%
+    <div className="grid max-h-svh min-h-svh grid-rows-[20svh_50svh_20svh] items-center justify-items-center">
+      <header className="row-start-1 flex flex-col items-center justify-center">
+        <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
+        <h3 className="pt-7">STEP 1</h3>
+        <h2 className="pt-2">Choose a Frame</h2>
       </header>
-      <h3 className="row-start-2">STEP 1</h3>
-      <h2 className="row-start-3">Choose a Frame</h2>
-      <main className="row-start-4 grid grid-cols-2 grid-rows-[1fr_20px] gap-8">
-        <AspectRatio ratio={136 / 366}>
+      <main className="row-start-2 grid h-full w-3/5 grid-cols-2 justify-center-safe gap-8 px-12">
+        <AspectRatio ratio={1080 / 3840} className="h-full">
           <Image
             onClick={() => {
               setSelectedFrame("light");
             }}
-            className={`box-content p-2 ${
+            className={`object-contain ${
               selectedFrame === "light" ? "border-2 border-(--saman-red)" : ""
             } `}
-            src="/next.svg"
+            src="/frame2.png"
             alt="Digital Frames"
-            width={180}
-            height={38}
+            fill
             priority
           />
         </AspectRatio>
-        <AspectRatio ratio={136 / 366}>
+        <AspectRatio ratio={1080 / 3840} className="h-full">
           <Image
             onClick={() => {
               setSelectedFrame("dark");
             }}
-            className={`box-content p-2 ${selectedFrame === "dark" ? "border-2 border-(--saman-red)" : ""} `}
-            src="/next.svg"
+            className={`object-contain ${selectedFrame === "dark" ? "border-2 border-(--saman-red)" : ""} `}
+            src="/frame2.png"
             alt="Digital Frames"
-            width={180}
-            height={38}
+            fill
             priority
           />
         </AspectRatio>
-        <div>
-          <h4 className="text-center">LIGHT VER.</h4>
-          <p className="text-center">(3 photos)</p>
-        </div>
-        <div>
-          <h4 className="text-center">DARK VER.</h4>
-          <p className="text-center">(3 photos)</p>
-        </div>
       </main>
-      <div className="row-start-5 flex w-full flex-row justify-center">
+      <div className="row-start-3 flex w-full flex-col items-center justify-start">
         <PrimaryButton disable={selectedFrame === ""}>
           <Link href="/access">
             <h4>Next</h4>
           </Link>
         </PrimaryButton>
-      </div>
-      <footer className="row-start-6">
         <Footer />
-      </footer>
+      </div>
     </div>
   );
 }

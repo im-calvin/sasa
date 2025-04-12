@@ -65,13 +65,17 @@ export default function CameraPage() {
       {flash && (
         <div className="animate-fade-out bg-background pointer-events-none absolute inset-0 z-99 min-h-lvh opacity-100" />
       )}
-      {/* top banner */}
-      <div className="row-start-1 h-full w-full bg-black" />
-      {/* bottom banner */}
-      <div className="row-start-3 h-full w-full bg-black" />
+      {!isLoading && (
+        <>
+          {/* top banner */}
+          <div className="row-start-1 h-full w-full bg-black" />
+          {/* bottom banner */}
+          <div className="row-start-3 h-full w-full bg-black" />
+        </>
+      )}
       {/* actual content */}
       {isLoading ? (
-        <div className="row-start-4">
+        <div className="row-start-2">
           <Loading text={"Great choices!"} />
         </div>
       ) : (
