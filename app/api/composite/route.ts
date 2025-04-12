@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     const backgroundImagePath = path.join(
       process.cwd(),
       "public",
-      "background.png",
+      "frame2.png",
     );
     const backgroundImage = await sharp(backgroundImagePath).toBuffer();
 
