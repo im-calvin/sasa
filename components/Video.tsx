@@ -10,8 +10,11 @@ import styles from "@/styles/Video.module.scss";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Skeleton } from "@/components/ui/skeleton";
 
-// Define Video as a regular function
-export const Video = forwardRef(function Video({}, ref) {
+interface VideoProps {
+  className?: string;
+}
+
+export const Video = forwardRef(function Video({ className }: VideoProps, ref) {
   const streamRef = useRef<MediaStream | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isStreamReady, setIsStreamReady] = useState(false);
@@ -110,14 +113,14 @@ export const Video = forwardRef(function Video({}, ref) {
   }));
 
   return isStreamReady ? (
-    <div className={`${styles.videoContainer}`}>
+    <div className={`${styles.videoContainer} h-full ${className}`}>
       <video
         autoPlay
         loop
         ref={videoRef}
         playsInline
         muted
-        className="h-lvh scale-x-[-1] transform object-cover"
+        className="h-full scale-x-[-1] transform object-cover"
         controls={false}
       />
     </div>
