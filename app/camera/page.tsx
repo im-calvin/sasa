@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 import { useScreenshots } from "@/lib/ScreenshotsContext";
 import PrimaryButton from "@/components/PrimaryButton";
 import { Loading } from "@/components/Loading";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const VideoMemo = memo(Video); // memoize so that video component doesn't rerender and flash
 
@@ -83,7 +82,7 @@ export default function CameraPage() {
           <div className="inset-0 -z-1 col-start-1 -col-end-1 row-start-2 h-full">
             <VideoMemo
               ref={videoRef}
-              className={`${isTakingPhotos ? "" : "scale-[1.1] transform blur-[2px] brightness-50"}`}
+              className={`scale-[1.1] ${isTakingPhotos ? "" : "transform blur-[2px] brightness-50"}`}
             />
             {time <= 5 && time > 0 && (
               <div className="absolute inset-0 z-0 flex w-screen items-center justify-center">
@@ -92,36 +91,33 @@ export default function CameraPage() {
             )}
           </div>
 
-          <main className="col-start-1 -col-end-1 row-start-2 w-full text-white">
-            <AspectRatio
-              ref={aspectRatioRef}
-              ratio={4 / 5}
-              className="flex flex-col items-center justify-center gap-32 pt-10 pb-4"
+          <main
+            className="col-start-1 -col-end-1 row-start-2 flex aspect-4/5 h-full w-auto flex-col items-center justify-center-safe text-white"
+            ref={aspectRatioRef}
+          >
+            <div
+              className={`flex flex-col items-center ${isTakingPhotos ? "invisible" : ""}`}
             >
-              <div
-                className={`flex flex-col items-center ${isTakingPhotos ? "invisible" : ""}`}
+              <h3>Step 3</h3>
+              <h2>Start Snapping</h2>
+            </div>
+            <div
+              className={`flex flex-col items-center justify-center gap-8 ${isTakingPhotos ? "invisible" : ""}`}
+            >
+              <p className="w-3/4 text-center">
+                {`You'll get ${MAX_PHOTOS} photos with ${RESET_TIME} seconds to pose each time`}
+              </p>
+              <PrimaryButton
+                disable={time === -1}
+                onClick={() => {
+                  setTime(RESET_TIME);
+                }}
+                className="text-black"
               >
-                <h3>Step 3</h3>
-                <h2>Start Snapping</h2>
-              </div>
-              <div
-                className={`flex flex-col items-center justify-center gap-8 ${isTakingPhotos ? "invisible" : ""}`}
-              >
-                <p className="w-3/4 text-center">
-                  {`You'll get ${MAX_PHOTOS} photos with ${RESET_TIME} seconds to pose each time`}
-                </p>
-                <PrimaryButton
-                  disable={time === -1}
-                  onClick={() => {
-                    setTime(RESET_TIME);
-                  }}
-                  className="text-black"
-                >
-                  <h4>{"I'm ready"}</h4>
-                </PrimaryButton>
-              </div>
-              <div className="bottom-4 text-white">{`${screenshots.length}/${MAX_PHOTOS}`}</div>
-            </AspectRatio>
+                <h4>{"I'm ready"}</h4>
+              </PrimaryButton>
+            </div>
+            <div className="">{`${screenshots.length}/${MAX_PHOTOS}`}</div>
           </main>
         </>
       )}

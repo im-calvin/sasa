@@ -18,13 +18,13 @@ export default function AccessPage() {
   }, []);
 
   return (
-    <div className="grid min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-8 p-8 sm:p-20">
-      <header className="row-start-1">
-        <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
+    <div className="grid max-h-svh min-h-svh grid-rows-[23svh_64svh_13svh] items-center justify-items-center">
+      <header className="row-start-1 flex flex-col items-center justify-center">
+        <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
+        <h3 className="pt-7">STEP 2</h3>
+        <h2 className="pt-2">Camera access</h2>
       </header>
-      <h3 className="row-start-2">STEP 2</h3>
-      <h2 className="row-start-3">Camera access</h2>
-      <main className="row-start-4 flex flex-col items-center gap-[32px]">
+      <main className="row-start-2 flex flex-col items-center gap-[32px]">
         {canNext ? (
           <>
             <p>Access granted</p>
@@ -49,16 +49,14 @@ export default function AccessPage() {
           </>
         )}
       </main>
-      <div className="row-start-5 flex w-full flex-row justify-center">
+      <div className="row-start-3 flex w-full flex-col items-center justify-center gap-2">
         <PrimaryButton disable={!canNext}>
           <Link href="/camera">
             <h4>Next</h4>
           </Link>
         </PrimaryButton>
-      </div>
-      <footer className="row-start-6">
         <Footer />
-      </footer>
+      </div>
     </div>
   );
 }

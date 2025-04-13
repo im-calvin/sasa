@@ -67,34 +67,39 @@ export const Video = forwardRef(function Video({ className }: VideoProps, ref) {
 
       // get the rectangle of the aspectratio component (non-hidden)
       const aspectRect = aspectRatioElement.getBoundingClientRect();
-      const videoRect = video.getBoundingClientRect();
 
-      // Calculate the overlap region
-      const overlapX = Math.max(0, aspectRect.left - videoRect.left);
-      const overlapY = Math.max(0, aspectRect.top - videoRect.top);
-      const overlapWidth = Math.min(
-        aspectRect.width,
-        videoRect.width - overlapX,
-      );
-      const overlapHeight = Math.min(
-        aspectRect.height,
-        videoRect.height - overlapY,
-      );
+      // Set canvas dimensions to the desired 4:5 aspect ratio
+      const outputWidth = aspectRect.width;
+      const outputHeight = aspectRect.height;
+      canvas.width = outputWidth;
+      canvas.height = outputHeight;
 
-      // Set canvas dimensions to the overlap region
-      canvas.width = overlapWidth;
-      canvas.height = overlapHeight;
+      // Calculate center of the video element (accounting for scale-[1.1])
+      // const videoRect = video.getBoundingClientRect();
+      // const scaleX = video.videoWidth / (videoRect.width / 1.1); // Reverse the 1.1x scaling
+      // const scaleY = video.videoHeight / (videoRect.height / 1.1);
 
-      // Scale the coordinates to match the video dimensions
-      const scaleX = video.videoWidth / videoRect.width;
-      const scaleY = video.videoHeight / videoRect.height;
+      // Calculate the portion of the video to capture (centered)
+      const videoAspectRatio = video.videoWidth / video.videoHeight;
+      const targetAspectRatio = 4 / 5;
 
-      const sourceX = overlapX * scaleX;
-      const sourceY = overlapY * scaleY;
-      const sourceWidth = overlapWidth * scaleX;
-      const sourceHeight = overlapHeight * scaleY;
+      let sourceWidth, sourceHeight, sourceX, sourceY;
 
-      // Draw the cropped video frame onto the canvas
+      if (videoAspectRatio > targetAspectRatio) {
+        // Video is wider, crop width
+        sourceHeight = video.videoHeight;
+        sourceWidth = sourceHeight * targetAspectRatio;
+        sourceX = (video.videoWidth - sourceWidth) / 2;
+        sourceY = 0;
+      } else {
+        // Video is taller, crop height
+        sourceWidth = video.videoWidth;
+        sourceHeight = sourceWidth / targetAspectRatio;
+        sourceX = 0;
+        sourceY = (video.videoHeight - sourceHeight) / 2;
+      }
+
+      // Draw the properly cropped video frame onto the canvas
       context?.drawImage(
         video,
         sourceX,
@@ -108,6 +113,7 @@ export const Video = forwardRef(function Video({ className }: VideoProps, ref) {
       );
 
       const imageDataUrl = canvas.toDataURL("image/png");
+
       return imageDataUrl;
     },
   }));

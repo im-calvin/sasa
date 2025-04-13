@@ -46,7 +46,7 @@ export default function FramePage() {
           />
         </div>
       </main>
-      <div className="row-start-3 flex w-full flex-col items-center justify-start">
+      <div className="row-start-3 flex w-full flex-col items-center justify-start gap-2">
         <PrimaryButton disable={selectedFrame === ""}>
           <Link href="/access">
             <h4>Next</h4>

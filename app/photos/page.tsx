@@ -6,7 +6,6 @@ import { NUM_PHOTOS } from "@/lib/constants";
 import PrimaryButton from "@/components/PrimaryButton";
 import Footer from "@/components/Footer";
 import NumberedCircle from "@/components/NumberedCircle";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useRouter } from "next/navigation";
 import { Loading } from "@/components/Loading";
 
@@ -53,21 +52,22 @@ export default function PhotosPage() {
     //   router.push(`/results?${params.toString()}`);
     // }, GIF_DURATION);
   }
+  console.log(screenshots);
 
   return (
-    <div className="grid min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-8 p-8 sm:p-20">
-      <header className="row-start-1">
-        <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
+    <div className="grid max-h-svh min-h-svh grid-rows-[23svh_64svh_13svh] items-center justify-items-center">
+      <header className="row-start-1 flex flex-col items-center justify-center">
+        <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
+        <h3 className="pt-7">STEP 4</h3>
+        <h2 className="pt-2">{`Choose Top ${NUM_PHOTOS}`}</h2>
       </header>
       {isLoading ? (
-        <div className="row-start-4">
+        <div className="row-start-2">
           <Loading text={"Great choices!"} />
         </div>
       ) : (
         <>
-          <h3 className="row-start-2">STEP 4</h3>
-          <h2 className="row-start-3">{`Choose Top ${NUM_PHOTOS}`}</h2>
-          <main className="row-start-4 grid w-4/5 grid-cols-2 gap-4">
+          <main className="row-start-2 grid h-full grid-cols-2 gap-4">
             {screenshots.map((screenshot, index) => (
               <div
                 key={index}
@@ -87,19 +87,19 @@ export default function PhotosPage() {
                       : 0
                   }
                 />
-                <AspectRatio ratio={4 / 5}>
+                <div className="relative aspect-4/5 h-full">
                   <Image
                     src={screenshot} // png string
                     alt={`Screenshot ${index + 1}`}
-                    className="h-full w-full object-cover"
-                    width={500} // these dont do anything idk what they're for tbh, but if u get rid of them then next.js complains so \o/
-                    height={500}
+                    className="h-full w-auto object-cover"
+                    fill
+                    priority
                   />
-                </AspectRatio>
+                </div>
               </div>
             ))}
           </main>
-          <div className="row-start-5 flex w-full flex-row justify-center">
+          <div className="row-start-3 flex w-full flex-col items-center justify-center gap-2">
             <PrimaryButton
               disable={selectedImages.length < NUM_PHOTOS}
               onClick={() => {
@@ -112,12 +112,10 @@ export default function PhotosPage() {
               <h4>Next</h4>
               {/* </span> */}
             </PrimaryButton>
+            <Footer />
           </div>
         </>
       )}
-      <footer className="row-start-6">
-        <Footer />
-      </footer>
     </div>
   );
 }
