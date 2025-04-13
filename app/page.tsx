@@ -12,11 +12,11 @@ export default function Home() {
       <main className="row-start-4 flex flex-col items-center gap-[32px]">
         <h1>Photo Corner</h1>
         <Image
-          className=""
-          src="/next.svg"
+          src="/home.png"
+          className="black"
           alt="Digital Frames"
-          width={180}
-          height={38}
+          width={1080}
+          height={300}
           priority
         />
         <p className="w-4/5 text-center">
