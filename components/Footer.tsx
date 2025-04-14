@@ -1,8 +1,12 @@
 import React from "react";
 
-export default function Footer() {
+interface FooterProps {
+  className?: string;
+}
+
+export default function Footer({ className }: FooterProps) {
   return (
-    <div className="caption">
+    <div className={`caption ${className}`}>
       {"Made by "}
       <a
         href="https://www.linkedin.com/in/samantha-yeung-profile/"

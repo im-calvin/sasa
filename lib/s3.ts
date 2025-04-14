@@ -10,7 +10,7 @@ const client = new S3Client({ region: process.env.AWS_REGION });
 export async function putImage(
   image: Buffer<ArrayBufferLike>,
 ): Promise<string> {
-  const key = `samanthas-photo-corner-${Date.now()}.png`;
+  const key = `samanthas-photo-booth-${Date.now()}.png`;
   const params: PutObjectRequest = {
     Body: image as unknown as undefined, // corrected type for S3 Body
     Key: key,

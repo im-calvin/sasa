@@ -58,7 +58,7 @@ export default function PhotosPage() {
   return (
     <div className="grid max-h-svh min-h-svh grid-rows-[23svh_64svh_13svh] items-center justify-items-center">
       <header className="row-start-1 flex flex-col items-center justify-center">
-        <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
+        <h5 className="pt-2">{"SAMANTHA'S PHOTO BOOTH"}</h5>
         {!isLoading && (
           <>
             <h3 className="pt-7">STEP 4</h3>
@@ -117,7 +117,7 @@ export default function PhotosPage() {
               <h4>Next</h4>
               {/* </span> */}
             </PrimaryButton>
-            <Footer />
+            <Footer className="invisible" />
           </div>
         </>
       )}

@@ -71,13 +71,12 @@ function ResultsContent() {
   }
 
   return (
-    <div className="grid max-h-svh min-h-svh grid-rows-[23svh_64svh_13svh] items-center justify-items-center">
+    <div className="grid max-h-svh min-h-svh grid-rows-[15svh_69svh_16svh] items-center justify-items-center">
       <header className="row-start-1 flex flex-col items-center justify-center">
-        <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
-        <h3 className="invisible pt-7">STEP 7</h3>
-        <h2 className="pt-2">{"Ta Daa~!"}</h2>
+        <h5 className="pt-2">{"SAMANTHA'S PHOTO BOOTH"}</h5>
+        <h2 className="pt-4">{"Ta Daa~!"}</h2>
       </header>
-      <main className="row-start-2 flex h-full w-auto items-center justify-center">
+      <main className="row-start-2 flex h-full w-auto items-center justify-center pt-2">
         {/* TODO add a fade from placeholder to normal */}
         <div className="aspect-frame relative mx-auto h-full">
           <Image
@@ -94,7 +93,7 @@ function ResultsContent() {
           />
         </div>
       </main>
-      <div className="row-start-3 flex w-full flex-col items-center gap-2">
+      <div className="row-start-3 flex w-full flex-col items-center gap-4">
         <PrimaryButton onClick={handleShare}>
           <h4>Download & Share</h4>
         </PrimaryButton>

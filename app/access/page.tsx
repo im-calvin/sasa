@@ -20,20 +20,20 @@ export default function AccessPage() {
   return (
     <div className="grid max-h-svh min-h-svh grid-rows-[23svh_64svh_13svh] items-center justify-items-center">
       <header className="row-start-1 flex flex-col items-center justify-center">
-        <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
+        <h5 className="pt-2">{"SAMANTHA'S PHOTO BOOTH"}</h5>
         <h3 className="pt-7">STEP 2</h3>
         <h2 className="pt-2">Camera access</h2>
       </header>
       <main className="row-start-2 flex flex-col items-center gap-[32px]">
         {canNext ? (
           <>
-            <p>Access granted</p>
+            <p>Access granted. Go next!</p>
           </>
         ) : (
           // ask for camera perms
           <>
             <p className="w-4/5 text-center">
-              Make sure you allow camera access before you start
+              Make sure you allow camera access before you start.
             </p>
             <p>
               Not popping up?{" "}
@@ -55,7 +55,7 @@ export default function AccessPage() {
             <h4>Next</h4>
           </Link>
         </PrimaryButton>
-        <Footer />
+        <Footer className="invisible" />
       </div>
     </div>
   );

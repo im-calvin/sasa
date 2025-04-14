@@ -75,13 +75,11 @@ export default function CameraPage() {
       {/* actual content */}
       {isLoading ? (
         <>
-          <div className="row-start-1">
-            <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
-            <h3 className="invisible pt-7">STEP 1</h3>
-            <h2 className="invisible pt-2">{"Ta Daa~!"}</h2>
+          <div className="row-start-1 flex h-full items-start">
+            <h5 className="pt-10">{"SAMANTHA'S PHOTO BOOTH"}</h5>
           </div>
           <div className="row-start-2 flex items-center justify-center">
-            <Loading text={"Great choices!"} />
+            <Loading text={"Lookin' Gooooood ;)"} />
           </div>
         </>
       ) : (

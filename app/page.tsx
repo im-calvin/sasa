@@ -28,7 +28,7 @@ export default function Home() {
           />
         </div>
       </main>
-      <div className="row-start-3 flex w-full flex-col items-center justify-start gap-2">
+      <div className="row-start-3 flex w-full flex-col items-center justify-start gap-4">
         <PrimaryButton>
           <Link href="/frame">
             <h4>Start</h4>

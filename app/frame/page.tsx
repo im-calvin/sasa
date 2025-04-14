@@ -14,7 +14,7 @@ export default function FramePage() {
     // bottom 2 rows is 13%
     <div className="grid max-h-svh min-h-svh grid-rows-[23svh_64svh_13svh] items-center justify-items-center">
       <header className="row-start-1 flex flex-col items-center justify-center">
-        <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
+        <h5 className="pt-2">{"SAMANTHA'S PHOTO BOOTH"}</h5>
         <h3 className="pt-7">STEP 1</h3>
         <h2 className="pt-2">Choose a Frame</h2>
       </header>
@@ -54,7 +54,7 @@ export default function FramePage() {
             <h4>Next</h4>
           </Link>
         </PrimaryButton>
-        <Footer />
+        <Footer className="invisible" />
       </div>
     </div>
   );
