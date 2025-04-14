@@ -110,7 +110,7 @@ export default function CameraPage() {
               className={`flex flex-col items-center justify-center gap-8 ${isTakingPhotos ? "invisible" : ""}`}
             >
               <p className="w-3/4 text-center">
-                {`You'll get ${MAX_PHOTOS} photos with ${RESET_TIME} seconds to pose each time`}
+                {`You'll get ${MAX_PHOTOS} photos with 5 seconds to pose each time`}
               </p>
               <PrimaryButton
                 disable={time === -1}
