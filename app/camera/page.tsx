@@ -121,13 +121,13 @@ export default function CameraPage() {
                 }}
                 className="text-black"
               >
-                <h4>{"I'm ready"}</h4>
+                <h4 className="font-bold">{"I'm ready"}</h4>
               </PrimaryButton>
-              <div>{`${screenshots.length}/${MAX_PHOTOS}`}</div>
+              <p>{`${screenshots.length}/${MAX_PHOTOS}`}</p>
             </div>
             {isTakingPhotos && (
               <>
-                <div className="flex h-full items-end pb-4 text-shadow-lg">{`${screenshots.length}/${MAX_PHOTOS}`}</div>
+                <p className="flex h-full items-end pb-4 text-shadow-lg">{`${screenshots.length}/${MAX_PHOTOS}`}</p>
               </>
             )}
           </main>
