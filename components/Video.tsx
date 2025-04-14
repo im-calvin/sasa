@@ -9,6 +9,7 @@ import {
 import styles from "@/styles/Video.module.scss";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Skeleton } from "@/components/ui/skeleton";
+import { requestCameraPermission } from "@/lib/utils";
 
 interface VideoProps {
   className?: string;
@@ -28,22 +29,14 @@ export const Video = forwardRef(function Video({ className }: VideoProps, ref) {
   }, [isStreamReady]);
 
   useEffect(() => {
-    async function requestCameraPermission() {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: {
-            facingMode: "user",
-          },
-        });
-        console.log("Camera permission granted");
-        streamRef.current = stream;
-        setIsStreamReady(true);
-      } catch (error) {
-        console.error("Camera permission denied", error);
+    (async () => {
+      const stream = await requestCameraPermission();
+      if (!stream) {
+        return; // fail quietly. wait for user to figure it out (alt: prompt the user with window.alert)
       }
-    }
-
-    requestCameraPermission();
+      streamRef.current = stream;
+      setIsStreamReady(true);
+    })(); // create an async anon and then immediately call it
 
     // cleanup when the page unloads
     return () => {

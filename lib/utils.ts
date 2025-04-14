@@ -5,7 +5,9 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function requestCameraPermission() {
+export async function requestCameraPermission(): Promise<
+  MediaStream | undefined
+> {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
       video: {
