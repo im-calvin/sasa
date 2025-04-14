@@ -25,7 +25,7 @@ export default function FramePage() {
               setSelectedFrame("light");
             }}
             className={`object-cover ${
-              selectedFrame === "light" ? "border-2 border-(--saman-red)" : ""
+              selectedFrame === "light" ? "outline-2 outline-(--saman-red)" : ""
             } `}
             src="/frame1.png"
             alt="Digital Frames"
@@ -38,7 +38,7 @@ export default function FramePage() {
             onClick={() => {
               setSelectedFrame("dark");
             }}
-            className={`object-cover ${selectedFrame === "dark" ? "border-2 border-(--saman-red)" : ""} `}
+            className={`object-cover ${selectedFrame === "dark" ? "outline-2 outline-(--saman-red)" : ""} `}
             src="/frame2.png"
             alt="Digital Frames"
             fill

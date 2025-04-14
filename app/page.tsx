@@ -7,7 +7,8 @@ export default function Home() {
   return (
     <div className="grid max-h-svh min-h-svh grid-rows-[10svh_auto_13svh] items-center justify-items-center overflow-hidden">
       <header className="row-start-1 flex flex-col items-center justify-center">
-        <h5 className="pt-2">{"IDEA GRAD SHOW 2025"}</h5>
+        {/* TODO this isn't aligned */}
+        <h5 className="pt2">{"IDEA GRAD SHOW 2025"}</h5>
       </header>
       <main className="row-start-2 flex h-full flex-col items-center justify-center">
         <div className="relative aspect-[428/633] h-full">
