@@ -1,9 +1,15 @@
+"use client";
 import Footer from "@/components/Footer";
 import PrimaryButton from "@/components/PrimaryButton";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    localStorage.clear();
+  });
+
   return (
     <div className="grid max-h-svh min-h-svh grid-rows-[10svh_auto_13svh] items-center justify-items-center overflow-hidden">
       <header className="row-start-1 flex flex-col items-center justify-center">
@@ -13,7 +19,7 @@ export default function Home() {
       <main className="row-start-2 flex h-full flex-col items-center justify-center">
         <div className="relative aspect-[428/633] h-full">
           <Image
-            src="/home.png"
+            src="/home.svg"
             className="aspect-frame relative mx-auto h-full overflow-hidden object-cover"
             alt="Digital Frames"
             fill

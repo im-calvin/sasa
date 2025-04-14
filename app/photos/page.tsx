@@ -8,12 +8,14 @@ import Footer from "@/components/Footer";
 import NumberedCircle from "@/components/NumberedCircle";
 import { useRouter } from "next/navigation";
 import { Loading } from "@/components/Loading";
+import { useFrame } from "@/lib/FrameContext";
 
 export default function PhotosPage() {
   const { screenshots } = useScreenshots();
   const router = useRouter();
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { selectedFrame } = useFrame();
 
   const toggleSelection = (image: string) => {
     setSelectedImages((prev) => {
@@ -33,7 +35,7 @@ export default function PhotosPage() {
     const response = await fetch("/api/composite", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ images: selectedImages }),
+      body: JSON.stringify({ images: selectedImages, frame: selectedFrame }),
     });
 
     if (!response.ok) {
@@ -70,7 +72,7 @@ export default function PhotosPage() {
             {screenshots.map((screenshot, index) => (
               <div
                 key={index}
-                className="relative aspect-4/5 h-[18vh]" // max height is 21.3 vh (64/3), saving some room for padding/gap
+                className="relative aspect-4/5 h-[21vh]" // max height is 21.3 vh (64/3), saving some room for padding/gap
                 onClick={() => {
                   toggleSelection(screenshot);
                 }}

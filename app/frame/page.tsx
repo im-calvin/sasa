@@ -25,9 +25,11 @@ export default function FramePage() {
               setSelectedFrame("light");
             }}
             className={`object-cover ${
-              selectedFrame === "light" ? "outline-2 outline-(--saman-red)" : ""
+              selectedFrame === "light"
+                ? "outline-2 outline-offset-4 outline-(--saman-red)"
+                : ""
             } `}
-            src="/frame1.png"
+            src="/frame1.svg"
             alt="Digital Frames"
             fill
             priority
@@ -38,8 +40,8 @@ export default function FramePage() {
             onClick={() => {
               setSelectedFrame("dark");
             }}
-            className={`object-cover ${selectedFrame === "dark" ? "outline-2 outline-(--saman-red)" : ""} `}
-            src="/frame2.png"
+            className={`object-cover ${selectedFrame === "dark" ? "outline-2 outline-offset-4 outline-(--saman-red)" : ""} `}
+            src="/frame2.svg"
             alt="Digital Frames"
             fill
             priority
