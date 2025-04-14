@@ -78,8 +78,8 @@ export default function CameraPage() {
           <Loading text={"Great choices!"} />
         </div>
       ) : (
-        <>
-          <div className="inset-0 -z-1 col-start-1 -col-end-1 row-start-2 h-full">
+        <div className="relative row-start-2 flex aspect-4/5 h-full w-screen items-center justify-center">
+          <div className="absolute inset-0 -z-1 h-full">
             <VideoMemo
               ref={videoRef}
               className={`scale-[1.1] ${isTakingPhotos ? "" : "transform blur-[2px] brightness-50"}`}
@@ -92,7 +92,7 @@ export default function CameraPage() {
           </div>
 
           <main
-            className="col-start-1 -col-end-1 row-start-2 flex aspect-4/5 h-full w-auto flex-col items-center justify-center-safe text-white"
+            className="flex aspect-4/5 h-full w-auto flex-col items-center justify-center gap-8 text-white"
             ref={aspectRatioRef}
           >
             <div
@@ -119,7 +119,7 @@ export default function CameraPage() {
             </div>
             <div className="">{`${screenshots.length}/${MAX_PHOTOS}`}</div>
           </main>
-        </>
+        </div>
       )}
     </div>
   );
