@@ -72,11 +72,11 @@ export default function PhotosPage() {
         </div>
       ) : (
         <>
-          <main className="row-start-2 grid h-full w-auto grid-cols-2 items-center gap-4 overflow-hidden px-8">
+          <main className="row-start-2 grid h-full w-auto grid-cols-2 items-center gap-x-4 gap-y-2 overflow-hidden">
             {screenshots.map((screenshot, index) => (
               <div
                 key={index}
-                className="relative aspect-4/5 h-[21vh]" // max height is 21.3 vh (64/3), saving some room for padding/gap
+                className="relative aspect-4/5 h-[19vh] w-auto" // max height is 21.3 vh (64/3), saving some room for padding/gap
                 onClick={() => {
                   toggleSelection(screenshot);
                 }}
@@ -113,9 +113,9 @@ export default function PhotosPage() {
             >
               {/* TODO there's some weird styling thing here. without a <Link/> the regular variant looks weird  */}
               {/* This works but its pretty inelegant */}
-              {/* <span className="font-geist font-bold text-lg"> */}
-              <h4>Next</h4>
-              {/* </span> */}
+              <span className="font-geist text-lg font-bold">
+                <h4>Next</h4>
+              </span>
             </PrimaryButton>
             <Footer className="invisible" />
           </div>

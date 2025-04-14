@@ -119,7 +119,10 @@ export default function CameraPage() {
                 }}
                 className="text-black"
               >
-                <h4 className="font-bold">{"I'm ready"}</h4>
+                {/* solution taken from photos page */}
+                <span className="font-geist text-lg font-bold">
+                  <h4>{"I'm ready"}</h4>
+                </span>
               </PrimaryButton>
               <p>{`${screenshots.length}/${MAX_PHOTOS}`}</p>
             </div>

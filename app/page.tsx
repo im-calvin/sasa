@@ -13,7 +13,6 @@ export default function Home() {
   return (
     <div className="grid max-h-svh min-h-svh grid-rows-[5svh_auto_13svh] items-center justify-items-center overflow-hidden">
       <header className="row-start-1 flex h-full w-full items-end justify-center">
-        {/* TODO this isn't aligned */}
         <h5>{"IDEA GRAD SHOW 2025"}</h5>
       </header>
       <main className="row-start-2 flex h-full flex-col items-center justify-center pt-10">
