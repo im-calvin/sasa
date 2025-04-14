@@ -15,43 +15,78 @@ export async function POST(req: Request) {
     }
 
     const frameT = frame as "light" | "dark";
-    const framePath = frameT === "light" ? "frame1.png" : "frame2.png";
+    const framePath = frameT === "light" ? "frame1.svg" : "frame2.svg";
 
     // public is not accessible from the server, so we need to use process.cwd() to get the path
     const backgroundImagePath = path.join(process.cwd(), "public", framePath);
-    const backgroundImage = await sharp(backgroundImagePath).toBuffer();
+    const backgroundImageBuffer = await sharp(backgroundImagePath).toBuffer();
 
-    const backgroundMetadata = await sharp(backgroundImagePath).metadata();
-    console.log("Background Image Dimensions:", backgroundMetadata);
+    // Get the background image dimensions to create our base canvas
+    const { width, height } = await sharp(backgroundImageBuffer).metadata();
+    if (!width || !height) {
+      return NextResponse.json(
+        { error: "Internal Server Error" },
+        { status: 500 },
+      );
+    }
+
+    console.log(width, height);
 
     // images should be 4 : 5 ratio
     const buffers = await Promise.all(
       images.map(async (image: string) => {
         const buffer = Buffer.from(image.split(",")[1], "base64"); // Decode base64
-        const resizedBuffer = await sharp(buffer).resize(896, 1120).toBuffer();
-
-        // Check the dimensions of each resized image
-        const imageMetadata = await sharp(resizedBuffer).metadata();
-        console.log("Resized Image Dimensions:", imageMetadata);
-
+        const resizedBuffer = await sharp(buffer).resize(900, 1125).toBuffer();
         return resizedBuffer;
       }),
     );
 
-    // Composite the images vertically
-    const compositeImageBuffer = await sharp(backgroundImage)
-      .composite(
-        buffers.map((buffer, index) => ({
-          input: buffer,
-          top: 1120 * index + 253,
-          left: 92,
-        })),
-      )
+    const blankCanvasBuffer = await sharp({
+      create: {
+        width,
+        height,
+        channels: 4,
+        background: { r: 255, g: 255, b: 255, alpha: 1 },
+      },
+    })
+      .png()
+      .toBuffer();
+
+    // Define position mappings for the images
+    const positions = [
+      { top: 258, left: 93 }, // Image 1
+      { top: 1456, left: 93 }, // Image 2
+      { top: 2648, left: 93 }, // Image 3
+    ];
+
+    // Composite the images onto the blank canvas
+    const compositeImages = buffers
+      .map((buffer, index) => ({
+        input: buffer,
+        top: positions[index]?.top || 0,
+        left: positions[index]?.left || 0,
+      }))
+      .slice(0, positions.length);
+
+    const withImagesBuffer = await sharp(blankCanvasBuffer)
+      .composite(compositeImages)
+      .png()
+      .toBuffer();
+
+    // Overlay the background image on top of everything
+    const finalCompositeBuffer = await sharp(withImagesBuffer)
+      .composite([
+        {
+          input: backgroundImageBuffer,
+          top: 0,
+          left: 0,
+        },
+      ])
       .png()
       .toBuffer();
 
     // store the image into s3
-    const url = await putImage(compositeImageBuffer);
+    const url = await putImage(finalCompositeBuffer);
 
     return NextResponse.json({ url });
   } catch (error) {

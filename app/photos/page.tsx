@@ -59,8 +59,12 @@ export default function PhotosPage() {
     <div className="grid max-h-svh min-h-svh grid-rows-[23svh_64svh_13svh] items-center justify-items-center">
       <header className="row-start-1 flex flex-col items-center justify-center">
         <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
-        <h3 className="pt-7">STEP 4</h3>
-        <h2 className="pt-2">{`Choose Top ${NUM_PHOTOS}`}</h2>
+        {!isLoading && (
+          <>
+            <h3 className="pt-7">STEP 4</h3>
+            <h2 className="pt-2">{`Choose Top ${NUM_PHOTOS}`}</h2>
+          </>
+        )}
       </header>
       {isLoading ? (
         <div className="row-start-2">

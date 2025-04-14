@@ -74,9 +74,14 @@ export default function CameraPage() {
       )}
       {/* actual content */}
       {isLoading ? (
-        <div className="row-start-2">
-          <Loading text={"Great choices!"} />
-        </div>
+        <>
+          <div className="row-start-1">
+            <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
+          </div>
+          <div className="row-start-2">
+            <Loading text={"Great choices!"} />
+          </div>
+        </>
       ) : (
         <div className="relative row-start-2 flex aspect-4/5 h-full w-screen items-center justify-center">
           <div className="absolute inset-0 -z-1 h-full">
