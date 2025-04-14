@@ -77,8 +77,10 @@ export default function CameraPage() {
         <>
           <div className="row-start-1">
             <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
+            <h3 className="invisible pt-7">STEP 1</h3>
+            <h2 className="invisible pt-2">{"Ta Daa~!"}</h2>
           </div>
-          <div className="row-start-2">
+          <div className="row-start-2 flex items-center justify-center">
             <Loading text={"Great choices!"} />
           </div>
         </>
@@ -101,10 +103,10 @@ export default function CameraPage() {
             ref={aspectRatioRef}
           >
             <div
-              className={`flex flex-col items-center ${isTakingPhotos ? "invisible" : ""}`}
+              className={`flex flex-col items-center gap-1 ${isTakingPhotos ? "invisible" : ""}`}
             >
               <h3>Step 3</h3>
-              <h2>Start Snapping</h2>
+              <h2 className="text-white">Start Snapping</h2>
             </div>
             <div
               className={`flex flex-col items-center justify-center gap-8 ${isTakingPhotos ? "invisible" : ""}`}
@@ -121,8 +123,13 @@ export default function CameraPage() {
               >
                 <h4>{"I'm ready"}</h4>
               </PrimaryButton>
+              <div>{`${screenshots.length}/${MAX_PHOTOS}`}</div>
             </div>
-            <div className="">{`${screenshots.length}/${MAX_PHOTOS}`}</div>
+            {isTakingPhotos && (
+              <>
+                <div className="flex h-full items-end pb-4 text-shadow-lg">{`${screenshots.length}/${MAX_PHOTOS}`}</div>
+              </>
+            )}
           </main>
         </div>
       )}

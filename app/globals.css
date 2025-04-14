@@ -135,6 +135,7 @@
     font-style: italic;
     font-size: 5rem;
     line-height: 1;
+    color: var(--saman-red);
   }
 
   h2 {
@@ -143,6 +144,7 @@
     font-style: italic;
     font-size: 3.25rem;
     line-height: 1;
+    color: var(--saman-red);
   }
 
   h3 {

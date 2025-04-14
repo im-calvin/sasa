@@ -2,7 +2,7 @@
 import Footer from "@/components/Footer";
 import { Loading } from "@/components/Loading";
 import PrimaryButton from "@/components/PrimaryButton";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useFrame } from "@/lib/FrameContext";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useCallback, useEffect, useRef } from "react";
@@ -19,6 +19,7 @@ function ResultsContent() {
   const router = useRouter();
   const params = useSearchParams();
   const fileRef = useRef<File | null>(null);
+  const { selectedFrame } = useFrame();
 
   const url = params.get("url") as string;
 
@@ -29,7 +30,7 @@ function ResultsContent() {
     }
     const response = await fetch(url);
     const blob = await response.blob();
-    const file = new File([blob], "Samantha's Photo Corner.jpg", {
+    const file = new File([blob], "Samantha's Photo Booth.jpg", {
       type: blob.type,
     });
     fileRef.current = file;
@@ -70,29 +71,35 @@ function ResultsContent() {
   }
 
   return (
-    <div className="grid min-h-svh grid-rows-[20px_10px_10px_1fr_20px_10px] items-center justify-items-center gap-8 p-8 sm:p-20">
-      <header className="row-start-1">
-        <h5>{"SAMANTHA'S PHOTO CORNER"}</h5>
+    <div className="grid max-h-svh min-h-svh grid-rows-[23svh_64svh_13svh] items-center justify-items-center">
+      <header className="row-start-1 flex flex-col items-center justify-center">
+        <h5 className="pt-2">{"SAMANTHA'S PHOTO CORNER"}</h5>
+        <h3 className="invisible pt-7">STEP 7</h3>
+        <h2 className="pt-2">{"Ta Daa~!"}</h2>
       </header>
-      <h2 className="row-start-3">Ta Daa~!</h2>
-      <main className="row-start-4 w-4/5">
-        <AspectRatio ratio={4 / 5}>
+      <main className="row-start-2 flex h-full w-auto items-center justify-center">
+        {/* TODO add a fade from placeholder to normal */}
+        <div className="aspect-frame relative mx-auto h-full">
           <Image
             src={url}
             alt="Photostrip"
-            width={500} // once again this don't do nothin
-            height={200}
+            fill
+            priority
+            placeholder="blur"
+            blurDataURL={
+              selectedFrame === "light"
+                ? "/frame1_blur.png"
+                : "/frame2_blur.png"
+            }
           />
-        </AspectRatio>
+        </div>
       </main>
-      <div className="row-start-5 flex w-full flex-row justify-center">
+      <div className="row-start-3 flex w-full flex-col items-center gap-2">
         <PrimaryButton onClick={handleShare}>
           <h4>Download & Share</h4>
         </PrimaryButton>
-      </div>
-      <footer className="row-start-6">
         <Footer />
-      </footer>
+      </div>
     </div>
   );
 }
