@@ -52,7 +52,6 @@ export default function PhotosPage() {
     //   router.push(`/results?${params.toString()}`);
     // }, GIF_DURATION);
   }
-  console.log(screenshots);
 
   return (
     <div className="grid max-h-svh min-h-svh grid-rows-[23svh_64svh_13svh] items-center justify-items-center">
@@ -67,11 +66,11 @@ export default function PhotosPage() {
         </div>
       ) : (
         <>
-          <main className="row-start-2 grid h-full grid-cols-2 gap-4">
+          <main className="row-start-2 grid h-full w-auto grid-cols-2 items-center gap-4 overflow-hidden px-8">
             {screenshots.map((screenshot, index) => (
               <div
                 key={index}
-                className="relative"
+                className="relative aspect-4/5 h-[18vh]" // max height is 21.3 vh (64/3), saving some room for padding/gap
                 onClick={() => {
                   toggleSelection(screenshot);
                 }}
@@ -87,15 +86,15 @@ export default function PhotosPage() {
                       : 0
                   }
                 />
-                <div className="relative aspect-4/5 h-full">
-                  <Image
-                    src={screenshot} // png string
-                    alt={`Screenshot ${index + 1}`}
-                    className="h-full w-auto object-cover"
-                    fill
-                    priority
-                  />
-                </div>
+                {/* <AspectRatio ratio={4 / 5}> */}
+                <Image
+                  src={screenshot} // png string
+                  alt={`Screenshot ${index + 1}`}
+                  className="h-full w-auto object-cover"
+                  fill
+                  priority
+                />
+                {/* </AspectRatio> */}
               </div>
             ))}
           </main>
