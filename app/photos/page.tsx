@@ -72,11 +72,11 @@ export default function PhotosPage() {
         </div>
       ) : (
         <>
-          <main className="row-start-2 grid h-full w-auto grid-cols-2 items-center gap-x-4 gap-y-2 overflow-hidden">
+          <main className="row-start-2 grid h-full w-auto grid-cols-2 items-center max-w-screen gap-x-4 gap-y-2 overflow-hidden">
             {screenshots.map((screenshot, index) => (
               <div
                 key={index}
-                className="relative aspect-4/5 h-[19vh] w-auto" // max height is 21.3 vh (64/3), saving some room for padding/gap
+                className="relative aspect-4/5 h-[19vh] w-auto max-w-[50vw]" // max height is 21.3 vh (64/3), saving some room for padding/gap
                 onClick={() => {
                   toggleSelection(screenshot);
                 }}

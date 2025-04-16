@@ -97,7 +97,7 @@ export default function CameraPage() {
           </div>
 
           <main
-            className="flex aspect-4/5 h-full w-auto flex-col max-w-screen items-center justify-center gap-8 text-white"
+            className="flex aspect-4/5 h-full w-auto flex-col items-center justify-center gap-8 text-white"
             ref={aspectRatioRef}
           >
             <div
