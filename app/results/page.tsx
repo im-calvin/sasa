@@ -78,7 +78,7 @@ function ResultsContent() {
       </header>
       <main className="row-start-2 flex h-full w-auto items-center justify-center pt-2">
         {/* TODO add a fade from placeholder to normal */}
-        <div className="aspect-frame relative mx-auto h-full">
+        <div className="aspect-frame max-w-screen relative mx-auto h-full">
           <Image
             src={url}
             alt="Photostrip"

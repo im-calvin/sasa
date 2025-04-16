@@ -16,7 +16,7 @@ export default function Home() {
         <h5>{"IDEA GRAD SHOW 2025"}</h5>
       </header>
       <main className="row-start-2 flex h-full flex-col items-center justify-center pt-10">
-        <div className="relative aspect-[428/633] h-full">
+        <div className="relative aspect-[428/633] max-w-screen h-full overflow-hidden">
           <Image
             src="/home.png"
             className="aspect-frame relative mx-auto h-full overflow-hidden object-cover"
